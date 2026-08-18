@@ -38,6 +38,38 @@ active / disabled via Tailwind state variants and the global
 `:focus-visible` outline (`app/globals.css`); form controls additionally
 carry an `aria-invalid` + inline error state driven by zod.
 
+## Signature devices (v2)
+Added to move the system away from generic "SaaS template" tells — a
+uniform icon-in-a-circle badge on every card, identical grids repeated
+section after section, safe/flat type scale — toward something specific to
+this brand's one owned symbol, the arch:
+
+- **Arch framing.** `#arch-frame` (an `objectBoundingBox` `<clipPath>`
+  defined once in `app/layout.tsx`) clips the hero photo into the Mark's own
+  doorway silhouette instead of a rounded rectangle. It scales with the
+  element, so it works at any image aspect ratio.
+- **No icon badges.** `TrustBadge` and `ProgramCard` render icons bare —
+  larger, colored, no circular background — per `.icon-mark` in
+  `app/globals.css`. `ProgramCard` pairs its icon with a thin accent rule
+  instead of a filled chip.
+- **Ghost numerals.** `ProcessStep` renders its index as a large, pale
+  `.ghost-numeral` behind the icon/title rather than a small badge number —
+  a step counter that reads as typography, not UI chrome.
+- **Grain.** `body::before` in `app/globals.css` overlays a low-opacity
+  (`0.05`) SVG `feTurbulence` texture in `overlay` blend mode across every
+  page, breaking up flat digital-smooth surfaces without touching any
+  component's own styling.
+- **Editorial type scale.** `SectionHeader`, the hero H1, and `ImpactMetric`
+  all sit well above the original scale (hero uses
+  `clamp(2.75rem,8vw,6.5rem)`) — typography carries visual weight that used
+  to come from decoration. `ImpactMetric` intentionally caps out lower
+  (`text-3xl` → `lg:text-5xl`) because its values are currently
+  `[נדרש אימות]` placeholder strings, not short numerals; re-check that cap
+  once real figures land and short numbers can carry a bigger size safely.
+- **Broken grid rhythm.** The program card grid staggers alternating cards
+  down via `[&>*:nth-child(2n)]:lg:mt-12` at `lg` — a margin offset, not a
+  transform, so it never fights the card's own hover-lift transform.
+
 ## Responsive
 Mobile-first Tailwind breakpoints (`sm`, `md`, `lg`); grid/flex layouts
 collapse to a single column below `md`. See `docs/RESPONSIVE_SYSTEM.md`.

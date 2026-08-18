@@ -19,6 +19,7 @@ export function MediaPlaceholder({
   ratio = "4 / 3",
   wash = "stone" as keyof typeof washes,
   markOpacity = 0.14,
+  rounded = true,
   className,
   label,
 }: {
@@ -26,6 +27,7 @@ export function MediaPlaceholder({
   ratio?: string;
   wash?: keyof typeof washes;
   markOpacity?: number;
+  rounded?: boolean;
   className?: string;
   label?: string;
 }) {
@@ -34,7 +36,7 @@ export function MediaPlaceholder({
       role="img"
       aria-label={label ?? "תמונה בהמתנה למקור אמיתי"}
       data-asset-id={assetId}
-      className={`relative overflow-hidden rounded-(--radius-md) ${className ?? ""}`}
+      className={`relative overflow-hidden ${rounded ? "rounded-(--radius-md)" : ""} ${className ?? ""}`}
       style={{ aspectRatio: ratio, background: washes[wash] ?? washes.stone }}
     >
       <Mark

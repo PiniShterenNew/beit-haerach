@@ -83,7 +83,9 @@
   --motion-fast: 120ms;
   --motion-base: 220ms;
   --motion-slow: 480ms;
+  --motion-slower: 760ms;
   --motion-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --motion-ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @theme inline {
@@ -225,4 +227,148 @@ h1, h2, h3, h4 {
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
+}
+
+/* ==========================================================================
+   Motion system v2 — scroll reveal, hero choreography, mark line-draw
+   Source: docs/MOTION_SYSTEM.md
+   ========================================================================== */
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes draw-stroke {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes mark-drift {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-10px, 8px) scale(1.015);
+  }
+}
+
+@keyframes underline-grow {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* Scroll reveal: Section observes itself and stamps [data-revealed] once
+   in view; children opt in with .reveal-item (+ optional --reveal-i for
+   stagger). See components/ui/section.tsx. */
+.reveal-item {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity var(--motion-slower) var(--motion-ease),
+    transform var(--motion-slower) var(--motion-ease);
+  transition-delay: calc(var(--reveal-i, 0) * 90ms);
+}
+[data-revealed] .reveal-item {
+  opacity: 1;
+  transform: translateY(0);
+}
+@media (scripting: none) {
+  .reveal-item {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.reveal-line {
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform var(--motion-slower) var(--motion-ease);
+  transition-delay: calc(var(--reveal-i, 0) * 90ms + 160ms);
+}
+[data-revealed] .reveal-line {
+  transform: scaleX(1);
+}
+
+/* Hero load-time cascade — always in view, so it plays on paint rather
+   than on scroll (no observer needed). */
+.hero-rise {
+  animation: rise-in var(--motion-slower) var(--motion-ease) both;
+  animation-delay: calc(var(--hero-i, 0) * 110ms);
+}
+
+.mark-draw-outer,
+.mark-draw-inner {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: draw-stroke 1.3s var(--motion-ease) 0.1s both;
+}
+.mark-draw-inner {
+  animation-delay: 0.35s;
+}
+.mark-draw-fill {
+  opacity: 0;
+  animation: rise-in var(--motion-slow) var(--motion-ease) 1.15s both;
+}
+.mark-drift {
+  animation: mark-drift 16s ease-in-out infinite;
+}
+
+.btn-press {
+  transition:
+    background-color var(--motion-base) var(--motion-ease),
+    color var(--motion-base) var(--motion-ease),
+    transform var(--motion-fast) var(--motion-ease),
+    box-shadow var(--motion-base) var(--motion-ease);
+}
+.btn-press:hover {
+  transform: translateY(-2px);
+}
+.btn-press:active {
+  transform: translateY(0) scale(0.97);
+}
+
+/* ==========================================================================
+   Material — grain texture, arch framing, ghost numerals
+   A deliberate, brand-specific counterweight to flat/generic surfaces.
+   ========================================================================== */
+
+body {
+  position: relative;
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  pointer-events: none;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.ghost-numeral {
+  font-family: var(--font-display);
+  color: var(--color-stone-200);
+  line-height: 1;
+  user-select: none;
+}
+
+.icon-mark {
+  color: var(--color-gold-600);
 }

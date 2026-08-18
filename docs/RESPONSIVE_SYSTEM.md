@@ -11,12 +11,25 @@ where most two-column sections collapse to one column below it.
 ## Mobile (< md)
 - Header collapses to logo + donate button + hamburger; full nav moves into
   `MobileNav`, a full-height drawer (not a dropdown) with 44px+ touch
-  targets and Escape-to-close.
+  targets and Escape-to-close. The header itself hides on scroll-down and
+  reappears on scroll-up (past a 140px threshold) to give small screens
+  their vertical space back — desktop keeps the header permanently visible.
 - All two/three/four-column grids (`ProgramCard` grid, highlight grids,
   footer columns) stack to a single column, or 2-up for compact tiles
   (amount selector).
-- Hero copy leads, image follows, both full-width.
 - `container-page` padding is 1.25rem below `md`, 2.5rem at/above.
+
+### Hero: composed per viewport, not shrunk
+The homepage hero is two distinct compositions, not one grid that
+collapses — the mobile version is not a smaller desktop:
+- **Mobile:** the image bleeds full-width above the fold (`rounded={false}`,
+  breaks out of `container-page`), fading into the navy field through a
+  gradient overlay so copy and image read as one continuous dark editorial
+  spread. Copy follows below, inside the normal padded container.
+- **Desktop (`≥ md`):** a contained `1.1fr/0.9fr` split — copy and a
+  shadowed, rounded image card side by side — with the giant watermark
+  `Mark` visible behind the copy column, which the mobile layout omits
+  visually (image covers that area instead).
 
 ## Desktop (≥ md)
 - Two-column editorial pairings (text + `MediaPlaceholder`) throughout About,

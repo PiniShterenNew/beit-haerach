@@ -1,3 +1,7 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+
 export function Section({
   children,
   className,
@@ -9,6 +13,31 @@ export function Section({
   tone?: "base" | "muted" | "inverse";
   id?: string;
 }) {
+  const ref = useRef<HTMLElement>(null);
+  const [revealed, setRevealed] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    if (typeof IntersectionObserver === "undefined") {
+      const id = window.setTimeout(() => setRevealed(true), 0);
+      return () => window.clearTimeout(id);
+    }
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            setRevealed(true);
+            observer.disconnect();
+          }
+        }
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -8% 0px" },
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   const toneClass =
     tone === "muted"
       ? "bg-(--color-surface-muted)"
@@ -16,7 +45,12 @@ export function Section({
         ? "bg-(--color-navy-950) text-(--color-text-inverse)"
         : "bg-(--color-surface-base)";
   return (
-    <section id={id} className={`${toneClass} py-16 md:py-24 ${className ?? ""}`}>
+    <section
+      ref={ref}
+      id={id}
+      data-revealed={revealed ? "" : undefined}
+      className={`${toneClass} py-16 md:py-24 ${className ?? ""}`}
+    >
       <div className="container-page">{children}</div>
     </section>
   );
@@ -40,7 +74,7 @@ export function SectionHeader({
   const Heading = level;
   return (
     <div
-      className={`mb-10 flex max-w-2xl flex-col gap-3 md:mb-14 ${
+      className={`reveal-item mb-10 flex max-w-2xl flex-col gap-3 md:mb-14 ${
         align === "center" ? "mx-auto text-center" : ""
       }`}
     >
@@ -54,7 +88,7 @@ export function SectionHeader({
         </span>
       ) : null}
       <Heading
-        className={`font-display ${level === "h1" ? "text-4xl md:text-5xl" : "text-3xl md:text-4xl"} ${inverse ? "" : "text-(--color-text-primary)"}`}
+        className={`font-display leading-[1.05] tracking-[-0.01em] ${level === "h1" ? "text-5xl md:text-6xl lg:text-7xl" : "text-4xl md:text-5xl lg:text-6xl"} ${inverse ? "" : "text-(--color-text-primary)"}`}
       >
         {title}
       </Heading>

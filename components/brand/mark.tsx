@@ -4,10 +4,16 @@ export function Mark({
   tone = "brand",
   className,
   titleId,
+  animate = false,
+  drift = false,
 }: {
   tone?: MarkTone;
   className?: string;
   titleId?: string;
+  /** Play a one-time stroke line-draw entrance on mount (hero use only). */
+  animate?: boolean;
+  /** Add a slow, continuous ambient drift (decorative watermark use only). */
+  drift?: boolean;
 }) {
   const archColor =
     tone === "mono" ? "currentColor" : tone === "inverse" ? "#F7F4EF" : "#0B1D3A";
@@ -22,7 +28,7 @@ export function Mark({
   return (
     <svg
       viewBox="0 0 200 220"
-      className={className}
+      className={`${className ?? ""} ${drift ? "mark-drift" : ""}`}
       role="img"
       aria-labelledby={titleId}
       fill="none"
@@ -34,6 +40,8 @@ export function Mark({
         stroke={archColor}
         strokeWidth={13}
         strokeLinecap="round"
+        pathLength={animate ? 1 : undefined}
+        className={animate ? "mark-draw-outer" : undefined}
       />
       {/* inner arch */}
       <path
@@ -42,28 +50,31 @@ export function Mark({
         strokeWidth={7}
         strokeLinecap="round"
         opacity={opacityInner}
+        pathLength={animate ? 1 : undefined}
+        className={animate ? "mark-draw-inner" : undefined}
       />
-      {/* open book */}
-      <path
-        d="M100,206 C82,206 60,197 46,180 C64,189 82,193 100,195 Z"
-        fill={pageLeft}
-      />
-      <path
-        d="M100,206 C118,206 140,197 154,180 C136,189 118,193 100,195 Z"
-        fill={pageRight}
-      />
-      <path
-        d="M100,193 L100,206"
-        stroke={figureColor}
-        strokeWidth={3}
-        strokeLinecap="round"
-      />
-      {/* growth / human figure */}
-      <circle cx="100" cy="118" r="10" fill={figureColor} />
-      <path
-        d="M100,130 C114,144 114,166 100,184 C86,166 86,144 100,130 Z"
-        fill={figureColor}
-      />
+      {/* open book + growth figure */}
+      <g className={animate ? "mark-draw-fill" : undefined}>
+        <path
+          d="M100,206 C82,206 60,197 46,180 C64,189 82,193 100,195 Z"
+          fill={pageLeft}
+        />
+        <path
+          d="M100,206 C118,206 140,197 154,180 C136,189 118,193 100,195 Z"
+          fill={pageRight}
+        />
+        <path
+          d="M100,193 L100,206"
+          stroke={figureColor}
+          strokeWidth={3}
+          strokeLinecap="round"
+        />
+        <circle cx="100" cy="118" r="10" fill={figureColor} />
+        <path
+          d="M100,130 C114,144 114,166 100,184 C86,166 86,144 100,130 Z"
+          fill={figureColor}
+        />
+      </g>
     </svg>
   );
 }

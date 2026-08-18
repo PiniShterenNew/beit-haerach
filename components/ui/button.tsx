@@ -5,18 +5,18 @@ type Variant = "primary" | "accent" | "secondary" | "ghost" | "inverse";
 type Size = "md" | "lg";
 
 const base =
-  "inline-flex items-center justify-center gap-2 rounded-(--radius-sm) font-medium transition-colors duration-(--motion-base) ease-[cubic-bezier(0.22,0.61,0.36,1)] focus-visible:outline-2 focus-visible:outline-offset-2 disabled:opacity-50 disabled:pointer-events-none";
+  "btn-press inline-flex items-center justify-center gap-2 rounded-(--radius-sm) font-medium focus-visible:outline-2 focus-visible:outline-offset-2 disabled:opacity-50 disabled:pointer-events-none";
 
 const variants: Record<Variant, string> = {
   primary:
-    "bg-(--color-action-primary) text-(--color-text-inverse) hover:bg-(--color-action-primary-hover)",
+    "bg-(--color-action-primary) text-(--color-text-inverse) hover:bg-(--color-action-primary-hover) hover:shadow-[0_12px_24px_-12px_rgba(11,29,58,0.55)]",
   accent:
-    "bg-(--color-action-accent) text-(--color-navy-950) hover:bg-(--color-action-accent-hover)",
+    "bg-(--color-action-accent) text-(--color-navy-950) hover:bg-(--color-action-accent-hover) hover:shadow-[0_12px_24px_-10px_rgba(212,175,55,0.6)]",
   secondary:
     "border border-(--color-border-strong) text-(--color-text-primary) hover:border-(--color-navy-950) hover:bg-(--color-surface-muted)",
   ghost: "text-(--color-text-primary) hover:bg-(--color-surface-muted)",
   inverse:
-    "bg-(--color-ivory-50) text-(--color-navy-950) hover:bg-(--color-gold-100)",
+    "bg-(--color-ivory-50) text-(--color-navy-950) hover:bg-(--color-gold-100) hover:shadow-[0_12px_24px_-12px_rgba(0,0,0,0.35)]",
 };
 
 const sizes: Record<Size, string> = {

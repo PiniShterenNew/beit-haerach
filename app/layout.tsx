@@ -56,6 +56,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${display.variable} ${body.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-(--color-surface-base) text-(--color-text-primary)">
+        <svg width="0" height="0" className="absolute" aria-hidden="true">
+          <defs>
+            <clipPath id="arch-frame" clipPathUnits="objectBoundingBox">
+              <path d="M0,1 L0,0.46 C0,0.16 0.21,0 0.5,0 C0.79,0 1,0.16 1,0.46 L1,1 Z" />
+            </clipPath>
+          </defs>
+        </svg>
         <SkipLink />
         <SiteHeader />
         <main id="main" className="flex-1">
