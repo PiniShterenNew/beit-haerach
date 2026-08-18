@@ -1,36 +1,76 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# מרכז קהילתי עזרת ישראל — website
 
-## Getting Started
+Production-grade Hebrew RTL nonprofit website for מרכז קהילתי עזרת ישראל
+(Haifa), covering the umbrella organization and its four programs: בית
+הארחה, מרפאות שיניים, כוללים, ישיבה.
 
-First, run the development server:
+See `BUILD_REPORT.md` for full status (what's built, open factual
+placeholders, asset gaps, donation/analytics status, and recommended next
+steps), and `/docs` for the product/brand/design/technical source documents
+this build follows.
+
+## Stack
+Next.js (App Router, TypeScript strict) · Tailwind CSS v4 (CSS-variable
+tokens) · `next/font` (Frank Ruhl Libre + Assistant, Hebrew subsets) · Zod
+for form validation. No CMS, no payment provider, no analytics vendor is
+wired yet — see "Open dependencies" below.
+
+## Getting started
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run build   # production build (also runs the TypeScript check)
+npm run lint    # ESLint
+npm start       # serve the production build
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Project structure
 
-## Learn More
+```
+app/                 routes (App Router), one folder per page in the sitemap
+  api/                route handlers for contact / volunteer / get-help forms
+components/
+  brand/              logo + master symbol (SVG)
+  ui/                 design-system primitives (Button, Field, Icon, Section, ...)
+  layout/             header, mobile nav, footer, skip link
+  sections/           page-composition blocks (ProgramCard, ProcessStep, ...)
+  donation/           donation amount selector + module (provider-agnostic UI)
+  forms/              contact / volunteer / get-help forms
+lib/
+  content/site.ts     site config, nav, program registry — single source of truth
+  donation/provider.ts  donation provider adapter boundary (see below)
+  validation/forms.ts   zod schemas shared by client forms + API routes
+  analytics/events.ts   analytics event boundary (see below)
+docs/                 brand, design system, and product docs (source of truth)
+public/assets/        brand SVGs, icons, and image-placeholder tracking
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Open dependencies (must be resolved before real launch)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. **Legal/entity facts** — see `docs/transparency` content and
+   `lib/content/site.ts` (`SITE.legalName`, `registrationNumber`,
+   `section46`, `phone`, `whatsapp`, `email`, `address`) — all currently
+   `[נדרש אימות]`.
+2. **Donation provider** — `lib/donation/provider.ts` exports a typed
+   `DonationProvider` interface and a `mockDonationProvider` that never
+   charges anything. Implement a real adapter and swap it in
+   `getDonationProvider()`; do not couple the UI to a vendor SDK directly.
+3. **Analytics vendor** — `lib/analytics/events.ts` defines the full event
+   catalog (`donation_started`, `volunteer_completed`, ...) but only logs to
+   the console in development. Wire a real provider inside `trackEvent()`.
+4. **Form destinations** — `app/api/{contact,volunteer,get-help}/route.ts`
+   validate with zod and currently only `console.info` the submission.
+   Connect a real destination (email/CRM) before launch.
+5. **Real imagery** — every photo on the site is an intentional, aspect-
+   ratio-locked `MediaPlaceholder`, tracked in `docs/ASSET_MANIFEST.json`
+   with exact specs in `docs/ASSET_REQUESTS.md`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+None of the above block development or a preview deploy — the UI, forms,
+and donation flow are fully functional end-to-end against the mock/stub
+implementations.

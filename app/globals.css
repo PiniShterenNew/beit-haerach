@@ -1,26 +1,228 @@
 @import "tailwindcss";
 
+/* ==========================================================================
+   Design Tokens — מרכז קהילתי עזרת ישראל
+   Source: docs/BRAND_DIRECTION.md, docs/DESIGN_SYSTEM.md
+   ========================================================================== */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Brand — master */
+  --color-navy-950: #0b1d3a;
+  --color-navy-900: #102547;
+  --color-navy-800: #16305a;
+  --color-navy-700: #1f3d6e;
+  --color-gold-600: #b5892a;
+  --color-gold-500: #d4af37;
+  --color-gold-400: #e0c366;
+  --color-gold-100: #f6ecd2;
+
+  /* Neutral / stone */
+  --color-stone-900: #2b2822;
+  --color-stone-700: #55504a;
+  --color-stone-500: #8a8377;
+  --color-stone-300: #c8c2b1;
+  --color-stone-200: #ded8c8;
+  --color-stone-100: #efeadd;
+  --color-ivory-50: #f7f4ef;
+  --color-white: #ffffff;
+
+  /* Program accents */
+  --color-sage-700: #4f6a56;
+  --color-sage-500: #6f8d76;
+  --color-sage-400: #8da88f;
+  --color-sage-100: #e4ece4;
+  --color-clinic-700: #2f5468;
+  --color-clinic-500: #4a7c93;
+  --color-clinic-400: #7aa6b8;
+  --color-clinic-100: #e2eef2;
+  --color-kollel-700: #8a6414;
+  --color-kollel-500: #b5892a;
+  --color-kollel-400: #d4af37;
+  --color-kollel-100: #f6ecd2;
+  --color-yeshiva-700: #33503a;
+  --color-yeshiva-500: #4f6a56;
+  --color-yeshiva-400: #6f8d76;
+  --color-yeshiva-100: #e4ece5;
+
+  /* Semantic surfaces */
+  --color-surface-base: var(--color-ivory-50);
+  --color-surface-raised: var(--color-white);
+  --color-surface-muted: var(--color-stone-100);
+  --color-surface-inverse: var(--color-navy-950);
+
+  /* Semantic text */
+  --color-text-primary: var(--color-navy-950);
+  --color-text-secondary: var(--color-stone-700);
+  --color-text-muted: var(--color-stone-500);
+  --color-text-inverse: var(--color-ivory-50);
+  --color-text-inverse-muted: var(--color-stone-300);
+
+  /* Semantic border */
+  --color-border-subtle: var(--color-stone-200);
+  --color-border-strong: var(--color-stone-300);
+  --color-border-inverse: rgba(247, 244, 239, 0.18);
+
+  /* Semantic action */
+  --color-action-primary: var(--color-navy-950);
+  --color-action-primary-hover: var(--color-navy-800);
+  --color-action-accent: var(--color-gold-500);
+  --color-action-accent-hover: var(--color-gold-600);
+
+  /* Feedback */
+  --color-feedback-error: #a3372f;
+  --color-feedback-error-bg: #f7e7e5;
+  --color-feedback-success: #3f6a4c;
+  --color-feedback-success-bg: #e7f0e9;
+
+  /* Radius / shadow / motion */
+  --radius-sm: 4px;
+  --radius-md: 10px;
+  --radius-lg: 20px;
+  --shadow-sm: 0 1px 2px rgba(11, 29, 58, 0.06);
+  --shadow-md: 0 8px 24px rgba(11, 29, 58, 0.08);
+  --motion-fast: 120ms;
+  --motion-base: 220ms;
+  --motion-slow: 480ms;
+  --motion-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-navy-950: var(--color-navy-950);
+  --color-navy-900: var(--color-navy-900);
+  --color-navy-800: var(--color-navy-800);
+  --color-navy-700: var(--color-navy-700);
+  --color-gold-600: var(--color-gold-600);
+  --color-gold-500: var(--color-gold-500);
+  --color-gold-400: var(--color-gold-400);
+  --color-gold-100: var(--color-gold-100);
+
+  --color-stone-900: var(--color-stone-900);
+  --color-stone-700: var(--color-stone-700);
+  --color-stone-500: var(--color-stone-500);
+  --color-stone-300: var(--color-stone-300);
+  --color-stone-200: var(--color-stone-200);
+  --color-stone-100: var(--color-stone-100);
+  --color-ivory-50: var(--color-ivory-50);
+
+  --color-sage-700: var(--color-sage-700);
+  --color-sage-500: var(--color-sage-500);
+  --color-sage-400: var(--color-sage-400);
+  --color-sage-100: var(--color-sage-100);
+  --color-clinic-700: var(--color-clinic-700);
+  --color-clinic-500: var(--color-clinic-500);
+  --color-clinic-400: var(--color-clinic-400);
+  --color-clinic-100: var(--color-clinic-100);
+  --color-kollel-700: var(--color-kollel-700);
+  --color-kollel-500: var(--color-kollel-500);
+  --color-kollel-400: var(--color-kollel-400);
+  --color-kollel-100: var(--color-kollel-100);
+  --color-yeshiva-700: var(--color-yeshiva-700);
+  --color-yeshiva-500: var(--color-yeshiva-500);
+  --color-yeshiva-400: var(--color-yeshiva-400);
+  --color-yeshiva-100: var(--color-yeshiva-100);
+
+  --color-surface-base: var(--color-surface-base);
+  --color-surface-raised: var(--color-surface-raised);
+  --color-surface-muted: var(--color-surface-muted);
+  --color-surface-inverse: var(--color-surface-inverse);
+
+  --color-text-primary: var(--color-text-primary);
+  --color-text-secondary: var(--color-text-secondary);
+  --color-text-muted: var(--color-text-muted);
+  --color-text-inverse: var(--color-text-inverse);
+  --color-text-inverse-muted: var(--color-text-inverse-muted);
+
+  --color-border-subtle: var(--color-border-subtle);
+  --color-border-strong: var(--color-border-strong);
+  --color-border-inverse: var(--color-border-inverse);
+
+  --color-action-primary: var(--color-action-primary);
+  --color-action-primary-hover: var(--color-action-primary-hover);
+  --color-action-accent: var(--color-action-accent);
+  --color-action-accent-hover: var(--color-action-accent-hover);
+
+  --color-feedback-error: var(--color-feedback-error);
+  --color-feedback-error-bg: var(--color-feedback-error-bg);
+  --color-feedback-success: var(--color-feedback-success);
+  --color-feedback-success-bg: var(--color-feedback-success-bg);
+
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --shadow-sm: var(--shadow-sm);
+  --shadow-md: var(--shadow-md);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    /* Editorial institutional brand — intentionally light-first.
+       Dark surfaces are used editorially (footer, hero) via explicit classes,
+       not via OS-level inversion, to preserve brand consistency. */
   }
 }
 
+* {
+  border-color: var(--color-border-subtle);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-surface-base);
+  color: var(--color-text-primary);
+  font-family: var(--font-body);
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+}
+
+::selection {
+  background: var(--color-gold-400);
+  color: var(--color-navy-950);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-gold-500);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.container-page {
+  width: 100%;
+  max-width: 84rem;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .container-page {
+    padding-inline: 2.5rem;
+  }
+}
+
+.sr-only-focusable:not(:focus) {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
 }

@@ -1,69 +1,150 @@
-import Image from "next/image";
+import type { Metadata } from "next";
+import Link from "next/link";
+import { Hero } from "@/components/sections/hero";
+import { Section, SectionHeader } from "@/components/ui/section";
+import { ProgramCard } from "@/components/sections/program-card";
+import { ProcessStep } from "@/components/sections/process-step";
+import { TrustBadge } from "@/components/sections/trust-badge";
+import { ImpactMetric } from "@/components/sections/impact-metric";
+import { Quote } from "@/components/sections/quote";
+import { MediaPlaceholder } from "@/components/ui/media-placeholder";
+import { Button } from "@/components/ui/button";
+import { Icon } from "@/components/ui/icon";
+import { PROGRAMS, CONVERSION } from "@/lib/content/site";
 
-export default function Home() {
+export const metadata: Metadata = {
+  title: "עמוד הבית",
+  description:
+    "מרכז קהילתי עזרת ישראל בחיפה — בית הארחה, מרפאות שיניים, כוללים וישיבה. פעילות קהילתית רציפה מתוך כבוד אדם והמשכיות.",
+};
+
+export default function HomePage() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <>
+      <Hero />
+
+      {/* Proof / trust strip */}
+      <Section tone="muted" className="py-10 md:py-12">
+        <div className="grid gap-8 sm:grid-cols-3">
+          <TrustBadge icon="calendar" title="פעילות רציפה מזה עשרות שנים" description="המשך ישיר למורשתו של הרב אברהם אטלס זצ״ל." />
+          <TrustBadge icon="community" title="ארבע תוכניות, מטרה אחת" description="בית הארחה, מרפאות שיניים, כוללים וישיבה — כולם תחת אותה קורת גג קהילתית." />
+          <TrustBadge icon="transparency" title="שקיפות כערך יסוד" description="מסמכי העמותה והדיווחים הציבוריים זמינים בעמוד השקיפות." />
+        </div>
+      </Section>
+
+      {/* What the organization is */}
+      <Section>
+        <div className="grid gap-12 md:grid-cols-2 md:items-center">
+          <div className="flex flex-col gap-5">
+            <span className="text-xs tracking-[0.16em] text-(--color-gold-600)">מי אנחנו</span>
+            <h2 className="font-display text-3xl md:text-4xl">
+              מרכז קהילתי אחד, שדואג לאדם בכמה מובנים בו זמנית
+            </h2>
+            <p className="text-base leading-relaxed text-(--color-text-secondary)">
+              עזרת ישראל אינה עמותת מזון בלבד. זהו מרכז קהילתי שמתוך אותה תפיסה — שאין להשאיר אדם
+              לבד כשיש עוד מישהו שיכול לדאוג לו — מפעיל בית הארחה שמבשל ומחלק ארוחות, מרפאות שיניים
+              נגישות, כוללי לימוד יומיים וישיבה. כל תוכנית עומדת בפני עצמה, וכולן חלק מאותה מערכת
+              אחת של אחריות קהילתית.
+            </p>
+            <Button href="/about" variant="secondary" className="self-start">
+              עוד על הסיפור וההיסטוריה שלנו
+            </Button>
+          </div>
+          <MediaPlaceholder assetId="img.about.building.01" ratio="4 / 3" wash="stone" label="מבנה המרכז הקהילתי בחיפה (בהמתנה לתמונה אמיתית)" />
+        </div>
+      </Section>
+
+      {/* Program ecosystem */}
+      <Section tone="muted">
+        <SectionHeader eyebrow="התוכניות שלנו" title="ארבע דרכים לדאוג לאותו אדם" lede="כל תוכנית פועלת בתחום משלה, מתוך אותה מחויבות לכבוד אנושי והמשכיות." />
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+          {PROGRAMS.map((program) => (
+            <ProgramCard key={program.id} program={program} />
+          ))}
+        </div>
+      </Section>
+
+      {/* How it works — guesthouse process */}
+      <Section>
+        <SectionHeader eyebrow="בית הארחה · איך זה עובד" title="מהמטבח עד השולחן" lede="תהליך יומיומי וקבוע, שחוזר על עצמו כל יום — ובערבי שבת וחג בעומס גדול הרבה יותר." />
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+          <ProcessStep index={1} icon="cooking" title="מבשלים" description="מטבח פעיל מכין ארוחות חמות מדי יום, כולל היערכות מוגברת לקראת שבת וחג." />
+          <ProcessStep index={2} icon="package" title="אורזים" description="מתנדבים אורזים את הארוחות במנות מוכנות למשלוח ולאיסוף." />
+          <ProcessStep index={3} icon="delivery" title="מחלקים" description="חלוקה ומשלוחים למי שזקוק, לצד אפשרות הגעה ואכילה במקום." />
+          <ProcessStep index={4} icon="meal" title="ארוחה וכבוד" description="לא רק אוכל — שולחן, נוכחות אנושית, והרגשה שיש מי שדואג." />
+        </div>
+      </Section>
+
+      {/* Human story */}
+      <Section tone="muted">
+        <div className="grid gap-12 md:grid-cols-2 md:items-center">
+          <MediaPlaceholder assetId="img.story.human.01" ratio="4 / 3" wash="sage" label="רגע אנושי מהפעילות היומיומית (בהמתנה לתמונה אמיתית)" />
+          <div className="flex flex-col gap-6">
+            <Quote text="לפעמים כל מה שחסר לאדם זה שולחן אחד שמחכה לו, ומישהו שישאל אותו איך הולך." />
+            <p className="text-sm leading-relaxed text-(--color-text-secondary)">
+              [נדרש אימות: סיפור אישי מאושר לפרסום]. עד לאישור סיפור ספציפי, אנו בוחרים שלא לפרסם
+              תיאור המזוהה עם אדם קונקרטי, מתוך שמירה על כבודו וסודיותו.
+            </p>
+            <Link href="/stories" className="inline-flex items-center gap-1.5 text-sm font-medium text-(--color-navy-950)">
+              לעוד סיפורים ועדויות
+              <Icon name="arrow" className="h-4 w-4 rotate-180" />
+            </Link>
+          </div>
+        </div>
+      </Section>
+
+      {/* Legacy */}
+      <Section tone="inverse">
+        <div className="grid gap-12 md:grid-cols-2 md:items-center">
+          <div className="flex flex-col gap-5">
+            <span className="text-xs tracking-[0.16em] text-(--color-gold-400)">המורשת שלנו</span>
+            <h2 className="font-display text-3xl md:text-4xl">הרב אברהם אטלס זצ״ל</h2>
+            <p className="text-base leading-relaxed text-(--color-text-inverse-muted)">
+              הפעילות שממשיכה כיום התחילה מתוך יוזמה אישית ומחויבות עמוקה לדאוג לכל מי שזקוק —
+              ללא הבדל, ללא תיוג, ומתוך כבוד. הרוח הזו ממשיכה להנחות את כל תוכניות המרכז הקהילתי
+              עד היום.
+            </p>
+          </div>
+          <MediaPlaceholder assetId="img.legacy.rabbi-atlas.01" ratio="4 / 3" wash="navy" label="תמונה היסטורית — הרב אברהם אטלס זצ״ל (בהמתנה לחומר ארכיוני מאומת)" />
+        </div>
+      </Section>
+
+      {/* Impact / donation lead-in */}
+      <Section>
+        <SectionHeader eyebrow="השפעה" title="מה שהתרומה שלכם מאפשרת" lede="[נדרש אימות: נתוני היקף פעילות עדכניים לפני פרסום כמדד רשמי]" />
+        <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
+          <ImpactMetric value="[נדרש אימות]" label="ארוחות בשנה" />
+          <ImpactMetric value="[נדרש אימות]" label="משפחות מטופלות" />
+          <ImpactMetric value="[נדרש אימות]" label="מתנדבים פעילים" />
+          <ImpactMetric value="+40" label="שנות פעילות רציפה" />
+        </div>
+      </Section>
+
+      {/* Trust */}
+      <Section tone="muted">
+        <SectionHeader eyebrow="שקיפות ואמון" title="פועלים בגלוי, כמו שראוי לארגון ציבורי" />
+        <div className="grid gap-8 sm:grid-cols-3">
+          <TrustBadge icon="document" title="מסמכי עמותה" description="מסמכי רישום ואישורים — יעודכנו בעמוד השקיפות עם אימותם." />
+          <TrustBadge icon="certificate" title="ניהול תקין" description="[נדרש אימות: סטטוס אישור ניהול תקין נוכחי]" />
+          <TrustBadge icon="accessibility" title="נגישות" description="האתר נבנה בהתאם לעקרונות נגישות WCAG 2.2 AA." />
+        </div>
+        <div className="mt-10">
+          <Button href="/transparency" variant="secondary">מסמכי שקיפות מלאים</Button>
+        </div>
+      </Section>
+
+      {/* Final CTA */}
+      <Section tone="inverse" className="text-center">
+        <div className="mx-auto flex max-w-xl flex-col items-center gap-6">
+          <h2 className="font-display text-3xl md:text-4xl">{CONVERSION.donateSecondary}</h2>
+          <p className="text-(--color-text-inverse-muted)">
+            כל תרומה, גדולה כקטנה, ממשיכה את הפעילות היומיומית של המרכז הקהילתי — בכל התוכניות.
           </p>
+          <Button href="/donate" size="lg" variant="accent">
+            {CONVERSION.donatePrimary}
+          </Button>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+      </Section>
+    </>
   );
 }
