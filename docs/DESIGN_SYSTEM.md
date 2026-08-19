@@ -39,11 +39,18 @@ stone-700 rather than the lighter steps.
 
 ## Typography
 
-- **Display** — Frank Ruhl Libre 400/500/700/900. All headings, headline-first hierarchy.
+- **Brand/Display (`--font-brand`, aliased as `--font-display`)** — Suez One
+  400, self-hosted via `next/font/local` (`app/fonts/suez-one/`, SIL OFL 1.1 —
+  license file alongside the font). Used deliberately: brand name, H1, and
+  major section H2 headings only — not every heading.
+- **Headings (`--font-heading`)** — Heebo 700, for H3/H4 (card and list
+  titles). Most `<h3>` in the codebase use the `font-heading` utility
+  explicitly, since the base `h3,h4` rule alone doesn't win against a
+  utility class in the cascade.
 - **Body (he)** — Heebo 300/400/500/700, line-height 1.8.
 - **Body (en)** — Inter 400/500/600/700.
 
-Loaded via `next/font/google` with `display: swap`. Scale is fluid `clamp()`:
+Heebo/Inter loaded via `next/font/google` with `display: swap`. Scale is fluid `clamp()`:
 `text-display`, `text-h1`–`text-h3`, `text-body-lg`/`body`/`body-sm`,
 `text-caption`, `text-overline`, `text-stat`.
 

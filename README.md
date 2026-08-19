@@ -11,9 +11,9 @@ this build follows.
 
 ## Stack
 Next.js (App Router, TypeScript strict) · Tailwind CSS v4 (CSS-variable
-tokens) · `next/font` (Frank Ruhl Libre + Assistant, Hebrew subsets) · Zod
-for form validation. No CMS, no payment provider, no analytics vendor is
-wired yet — see "Open dependencies" below.
+tokens) · `next/font` (Suez One, self-hosted, for display · Heebo for body,
+Hebrew subsets) · Zod for form validation. No CMS, no payment provider, no
+analytics vendor is wired yet — see "Open dependencies" below.
 
 ## Getting started
 

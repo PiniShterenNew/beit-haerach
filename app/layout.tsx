@@ -1,15 +1,17 @@
 import type { Metadata } from "next";
-import { Frank_Ruhl_Libre, Heebo, Inter } from "next/font/google";
+import localFont from "next/font/local";
+import { Heebo, Inter } from "next/font/google";
 import "./globals.css";
 import { SITE } from "@/lib/content/site";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 
-/* כותרות — סריף כבד, עברית ואנגלית מאותה משפחה */
-const frankRuhlLibre = Frank_Ruhl_Libre({
-  subsets: ["hebrew", "latin"],
-  weight: ["400", "500", "700", "900"],
-  variable: "--font-frank-ruhl",
+/* פונט המותג — Suez One (SIL OFL 1.1, ראו app/fonts/suez-one/OFL.txt).
+   משמש רק דרך --font-brand: שם המותג, H1, כותרות Section מרכזיות. */
+const suezOne = localFont({
+  src: "./fonts/suez-one/SuezOne-Regular.ttf",
+  weight: "400",
+  variable: "--font-suez-one",
   display: "swap",
 });
 
@@ -62,7 +64,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="he"
       dir="rtl"
-      className={`${frankRuhlLibre.variable} ${heebo.variable} ${inter.variable}`}
+      className={`${suezOne.variable} ${heebo.variable} ${inter.variable}`}
     >
       <body className="flex min-h-screen flex-col">
         <a href="#main" className="skip-link">

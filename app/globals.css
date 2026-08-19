@@ -98,13 +98,12 @@
   --color-terra-accessible: var(--color-terra-700); /* #963815 — טקסט/כפתורים, AA */
 
   /* טיפוגרפיה
-     --font-brand — Gladia CLM Bold. משמש רק לשם המותג, H1, כותרות Section
-     מרכזיות ומספר משפטי Display. ה-asset עדיין לא במאגר (ראו TODO ב-
-     app/layout.tsx ו-docs/FONTS.md) — הנפילה החוזרת היא ערימת serif מערכת
-     ניטרלית, לא פונט אקראי שמתחזה ל-Gladia.
+     --font-brand — Suez One (SIL OFL 1.1; הקובץ והרישיון ב-app/fonts/suez-one/),
+     נטען מקומית דרך next/font/local ב-app/layout.tsx. משמש רק לשם המותג, H1,
+     כותרות Section מרכזיות ומספר משפטי Display — לא לכל טקסט באתר.
      --font-display הוא alias היסטורי לאותו משתנה, כדי לא לשנות בכל הקומפוננטות
      את שם ה-utility (font-display) שכבר בשימוש נרחב. */
-  --font-brand: Georgia, "Times New Roman", serif; /* TODO: prepend var(--font-gladia) once public/assets/fonts/gladia/ exists */
+  --font-brand: var(--font-suez-one), Georgia, "Times New Roman", serif;
   --font-display: var(--font-brand);
   /* כותרות משניות (H3 ומטה) — Heebo במשקל כבד, לא Gladia */
   --font-heading: var(--font-body);
