@@ -191,6 +191,12 @@
   --color-action-secondary: var(--color-gold-500);
   --color-action-secondary-hover: var(--color-gold-600);
 
+  /* משוב טפסים */
+  --color-feedback-error: var(--color-terra-700);
+  --color-feedback-error-bg: var(--color-terra-50);
+  --color-feedback-success: var(--color-sage-700);
+  --color-feedback-success-bg: var(--color-sage-50);
+
   /* צבעי זרועות — הגוון המלא, למילויים ולגרפיקה (סף 3:1) */
   --color-branch-hospitality: var(--color-gold-600);
   --color-branch-dental: var(--color-calm-500);
@@ -332,13 +338,45 @@ video {
 .container {
   width: 100%;
   margin-inline: auto;
-  padding-inline: 1rem;
+  padding-inline: 1.25rem; /* 20px — מרווח אופקי אחיד בכל האתר */
 }
 
 @media (min-width: 768px) {
   .container {
     padding-inline: 1.5rem;
   }
+}
+
+/* --------------------------------------------------------------------------
+   Navigation links
+   הסימון של העמוד הפעיל אינו נשען על צבע בלבד: קו תחתון + משקל גופן, כדי
+   שיהיה קריא גם למי שאינו מבחין בהפרש הגוון.
+   -------------------------------------------------------------------------- */
+
+.nav-link {
+  position: relative;
+  display: inline-flex;
+  min-block-size: 2.75rem;
+  align-items: center;
+  padding-inline: 0.75rem;
+  border-radius: var(--radius-md);
+  font-size: var(--text-body-sm);
+  font-weight: 500;
+  transition: color var(--duration-fast) var(--ease-gentle);
+}
+
+.nav-link--active {
+  font-weight: 700;
+}
+
+.nav-link--active::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0.75rem;
+  inset-block-end: 0.5rem;
+  block-size: 2px;
+  border-radius: 2px;
+  background: currentColor;
 }
 
 /* ==========================================================================

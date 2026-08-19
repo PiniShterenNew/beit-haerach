@@ -4,8 +4,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { ArchImage } from "@/components/ui/ArchImage";
 import { BentoGrid, BentoCell } from "@/components/ui/BentoGrid";
-import { StatCounter } from "@/components/ui/StatCounter";
-import { Placeholder } from "@/components/ui/Placeholder";
+import { Stat } from "@/components/ui/Stat";
 import { SectionDivider } from "@/components/ui/SectionDivider";
 import { Button } from "@/components/ui/Button";
 import { Icon, type IconName } from "@/components/ui/icon";
@@ -86,7 +85,7 @@ export function BranchPage({ branch }: { branch: Branch }) {
 
       {/* סטטיסטיקות */}
       <Section tone="deep">
-        <Reveal className="mb-10 flex max-w-2xl flex-col gap-3">
+        <Reveal className="mb-10 flex flex-col gap-3 text-center md:max-w-2xl md:text-start">
           <Eyebrow tone="inverse">במספרים</Eyebrow>
           <h2 className="font-display text-h2 text-white">היקף הפעילות</h2>
         </Reveal>
@@ -100,22 +99,13 @@ export function BranchPage({ branch }: { branch: Branch }) {
               index={i}
               className="border border-white/10 !bg-white/[0.04]"
             >
-              <span className="font-display text-stat font-black text-(--color-gold-400)">
-                {stat.value === "—" ? <span aria-hidden="true">—</span> : <StatCounter value={stat.value} />}
-              </span>
-              <span className="mt-3 text-body-sm text-(--color-navy-200)">
-                {stat.pending ? (
-                  <Placeholder needs={`${branch.id}-stat-${i}`}>{stat.label}</Placeholder>
-                ) : (
-                  stat.label
-                )}
-              </span>
+              <Stat stat={stat} tone="dark" needs={`${branch.id}-stat-${i}`} />
             </BentoCell>
           ))}
         </BentoGrid>
 
         <Reveal className="mt-8">
-          <p className="text-caption text-(--color-navy-300)">
+          <p className="text-caption text-(--color-navy-300) text-center md:text-start">
             * נתונים המסומנים בקו מקווקו טרם אומתו רשמית ויעודכנו עם אישורם.
           </p>
         </Reveal>

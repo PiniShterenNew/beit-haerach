@@ -28,9 +28,12 @@ export function LogoMark({ className, tone = "brand" }: { className?: string; to
 export function Logo({
   tone = "brand",
   className,
+  compact = false,
 }: {
   tone?: "brand" | "inverse";
   className?: string;
+  /** מסתיר את שורת התיאור מתחת ל-380px, שם היא דוחפת את הכותרת מעבר לרוחב */
+  compact?: boolean;
 }) {
   const nameColor = tone === "inverse" ? "text-(--color-text-inverse)" : "text-(--color-text-primary)";
   const subColor = tone === "inverse" ? "text-(--color-gold-300)" : "text-(--color-text-accent)";
@@ -42,7 +45,11 @@ export function Logo({
         <span className={`font-display text-xl font-bold tracking-tight ${nameColor}`}>
           {SITE.name}
         </span>
-        <span className={`mt-1 text-[0.6875rem] font-medium tracking-[0.06em] ${subColor}`}>
+        <span
+          className={`mt-1 text-[0.6875rem] font-medium tracking-[0.06em] ${subColor} ${
+            compact ? "hidden min-[380px]:block" : ""
+          }`}
+        >
           {SITE.tagline}
         </span>
       </span>

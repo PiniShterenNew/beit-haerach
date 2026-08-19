@@ -20,10 +20,10 @@ export function AmountSelector({
             role="radio"
             aria-checked={selected}
             onClick={() => onChange(amount)}
-            className={`flex h-14 items-center justify-center rounded-(--radius-sm) border text-lg font-medium transition-colors ${
+            className={`flex h-14 items-center justify-center rounded-md border text-h3 font-bold transition-colors ${
               selected
-                ? "border-(--color-navy-950) bg-(--color-navy-950) text-(--color-text-inverse)"
-                : "border-(--color-border-strong) text-(--color-text-primary) hover:border-(--color-navy-950)"
+                ? "border-(--color-action-primary) bg-(--color-action-primary) text-(--color-text-on-action)"
+                : "border-(--color-border-default) text-(--color-text-primary) hover:border-(--color-action-primary)"
             }`}
           >
             ₪{amount}
@@ -35,10 +35,10 @@ export function AmountSelector({
         role="radio"
         aria-checked={value === "custom"}
         onClick={() => onChange("custom")}
-        className={`col-span-2 flex h-14 items-center justify-center rounded-(--radius-sm) border text-sm font-medium transition-colors sm:col-span-4 ${
+        className={`col-span-2 flex h-14 items-center justify-center rounded-md border text-body-sm font-medium transition-colors sm:col-span-4 ${
           value === "custom"
-            ? "border-(--color-navy-950) bg-(--color-navy-950) text-(--color-text-inverse)"
-            : "border-(--color-border-strong) text-(--color-text-primary) hover:border-(--color-navy-950)"
+            ? "border-(--color-action-primary) bg-(--color-action-primary) text-(--color-text-on-action)"
+            : "border-(--color-border-default) text-(--color-text-primary) hover:border-(--color-action-primary)"
         }`}
       >
         סכום אחר

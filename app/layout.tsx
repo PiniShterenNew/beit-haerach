@@ -36,6 +36,9 @@ export const metadata: Metadata = {
     template: `%s | ${SITE.name}`,
   },
   description: SITE.description,
+  /* canonical יחסי — Next פותר אותו מול metadataBase לכל נתיב בנפרד,
+     כך שכל עמוד מקבל canonical משלו בלי לחזור על עצמו בכל קובץ. */
+  alternates: { canonical: "./" },
   openGraph: {
     type: "website",
     locale: "he_IL",

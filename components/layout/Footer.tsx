@@ -16,11 +16,11 @@ export function Footer() {
           <Logo tone="inverse" />
           <p className="max-w-sm text-body-sm text-(--color-navy-200)">{SITE.description}</p>
 
-          <ul className="flex flex-col gap-2.5 text-body-sm">
+          <ul className="flex flex-col gap-1 text-body-sm">
             <li>
               <a
                 href={`tel:${SITE.phone.value.replace(/-/g, "")}`}
-                className="inline-flex items-center gap-2 text-(--color-navy-100) transition-colors hover:text-white"
+                className="inline-flex min-h-11 items-center gap-2 text-(--color-navy-100) transition-colors hover:text-white"
               >
                 <Icon name="phone" className="h-4 w-4 shrink-0 text-(--color-gold-400)" />
                 <Placeholder needs="phone">{SITE.phone.value}</Placeholder>
@@ -29,13 +29,13 @@ export function Footer() {
             <li>
               <a
                 href={`mailto:${SITE.email.value}`}
-                className="inline-flex items-center gap-2 text-(--color-navy-100) transition-colors hover:text-white"
+                className="inline-flex min-h-11 items-center gap-2 text-(--color-navy-100) transition-colors hover:text-white"
               >
                 <Icon name="mail" className="h-4 w-4 shrink-0 text-(--color-gold-400)" />
                 <Placeholder needs="email">{SITE.email.value}</Placeholder>
               </a>
             </li>
-            <li className="inline-flex items-center gap-2 text-(--color-navy-100)">
+            <li className="flex min-h-11 items-center gap-2 text-(--color-navy-100)">
               <Icon name="location" className="h-4 w-4 shrink-0 text-(--color-gold-400)" />
               <Placeholder needs="address">{SITE.address.value}</Placeholder>
             </li>
@@ -45,12 +45,12 @@ export function Footer() {
         {/* עמודה 2 — ניווט */}
         <nav aria-label="קישורים באתר" className="flex flex-col gap-4">
           <h2 className="text-overline font-body font-medium text-(--color-gold-300)">ניווט מהיר</h2>
-          <ul className="grid grid-cols-2 gap-x-4 gap-y-2.5 lg:grid-cols-1">
+          <ul className="grid grid-cols-2 gap-x-4 lg:grid-cols-1">
             {FOOTER_LINKS.map((link) => (
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className="inline-flex min-h-6 items-center py-1 text-body-sm text-(--color-navy-100) transition-colors hover:text-white"
+                  className="inline-flex min-h-11 items-center text-body-sm text-(--color-navy-100) transition-colors hover:text-white"
                 >
                   {link.label}
                 </Link>
@@ -62,12 +62,12 @@ export function Footer() {
         {/* עמודה 3 — זרועות + תרומה */}
         <div className="flex flex-col gap-4">
           <h2 className="text-overline font-body font-medium text-(--color-gold-300)">תחומי פעילות</h2>
-          <ul className="flex flex-col gap-2.5">
+          <ul className="flex flex-col">
             {BRANCHES.map((branch) => (
               <li key={branch.id}>
                 <Link
                   href={branch.href}
-                  className="inline-flex min-h-6 items-center py-1 text-body-sm text-(--color-navy-100) transition-colors hover:text-white"
+                  className="inline-flex min-h-11 items-center text-body-sm text-(--color-navy-100) transition-colors hover:text-white"
                 >
                   {branch.name}
                 </Link>

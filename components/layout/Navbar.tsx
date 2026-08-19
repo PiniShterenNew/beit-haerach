@@ -21,6 +21,8 @@ export function Navbar() {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const pathname = usePathname();
   const closeTimer = useRef<number | undefined>(undefined);
+  const panelRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
 
   /* מעל ה-hero רק בעמוד הבית; בכל שאר העמודים ה-navbar אטום מהרגע הראשון. */
   const overHero = pathname === "/";
@@ -59,6 +61,45 @@ export function Navbar() {
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
+  /* הפאנל מתנהג כדיאלוג, ולכן הפוקוס נכנס אליו בפתיחה, לכוד בתוכו כל עוד
+     הוא פתוח, וחוזר לכפתור הפותח בסגירה. בלי זה ניווט מקלדת "בורח" אל
+     התוכן שמאחורי הפאנל בזמן שהוא מכסה אותו. */
+  useEffect(() => {
+    if (!menuOpen) return;
+    const panel = panelRef.current;
+    if (!panel) return;
+    /* נשמר מקומית: עד שה-cleanup רץ, ה-ref כבר עלול להצביע למשהו אחר. */
+    const trigger = triggerRef.current;
+
+    const selector =
+      'a[href], button:not([disabled]), input, select, textarea, [tabindex]:not([tabindex="-1"])';
+    const first = panel.querySelector<HTMLElement>(selector);
+    first?.focus();
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key !== "Tab") return;
+      const items = [...panel.querySelectorAll<HTMLElement>(selector)].filter(
+        (el) => el.offsetParent !== null,
+      );
+      if (!items.length) return;
+      const firstItem = items[0];
+      const lastItem = items[items.length - 1];
+      if (e.shiftKey && document.activeElement === firstItem) {
+        e.preventDefault();
+        lastItem.focus();
+      } else if (!e.shiftKey && document.activeElement === lastItem) {
+        e.preventDefault();
+        firstItem.focus();
+      }
+    };
+
+    panel.addEventListener("keydown", onKeyDown);
+    return () => {
+      panel.removeEventListener("keydown", onKeyDown);
+      trigger?.focus();
+    };
+  }, [menuOpen]);
+
   const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
 
   return (
@@ -70,9 +111,9 @@ export function Navbar() {
             : "border-b border-transparent bg-transparent"
         }`}
       >
-        <div className="container max-w-content flex h-(--navbar-h) items-center justify-between gap-4">
+        <div className="container max-w-content flex h-(--navbar-h) items-center justify-between gap-2 sm:gap-4">
           <Link href="/" aria-label={`${"עזרת ישראל"} — לעמוד הבית`} className="shrink-0">
-            <Logo tone={solid ? "brand" : "inverse"} />
+            <Logo tone={solid ? "brand" : "inverse"} compact />
           </Link>
 
           {/* ניווט דסקטופ */}
@@ -85,12 +126,15 @@ export function Navbar() {
                   <Link
                     key={item.href}
                     href={item.href}
-                    className={`inline-flex min-h-11 items-center rounded-md px-3 text-body-sm font-medium transition-colors duration-200 ${
+                    aria-current={isActive(item.href) ? "page" : undefined}
+                    className={`nav-link ${isActive(item.href) ? "nav-link--active" : ""} ${
                       solid
                         ? isActive(item.href)
                           ? "text-(--color-text-accent)"
                           : "text-(--color-text-secondary) hover:text-(--color-text-primary)"
-                        : "text-(--color-stone-200) hover:text-white"
+                        : isActive(item.href)
+                          ? "text-white"
+                          : "text-(--color-stone-200) hover:text-white"
                     }`}
                   >
                     {item.label}
@@ -117,12 +161,14 @@ export function Navbar() {
                     onClick={() =>
                       setOpenDropdown((current) => (current === item.href ? null : item.href))
                     }
-                    className={`inline-flex min-h-11 items-center gap-1.5 rounded-md px-3 text-body-sm font-medium transition-colors duration-200 ${
+                    className={`nav-link gap-1.5 ${isActive(item.href) ? "nav-link--active" : ""} ${
                       solid
                         ? isActive(item.href)
                           ? "text-(--color-text-accent)"
                           : "text-(--color-text-secondary) hover:text-(--color-text-primary)"
-                        : "text-(--color-stone-200) hover:text-white"
+                        : isActive(item.href)
+                          ? "text-white"
+                          : "text-(--color-stone-200) hover:text-white"
                     }`}
                   >
                     {item.label}
@@ -141,7 +187,12 @@ export function Navbar() {
                           <li key={child.href}>
                             <Link
                               href={child.href}
-                              className="flex min-h-11 items-center px-4 py-2.5 text-body-sm text-(--color-text-secondary) transition-colors hover:bg-(--color-surface-warm) hover:text-(--color-text-primary)"
+                              aria-current={pathname === child.href ? "page" : undefined}
+                              className={`flex min-h-11 items-center border-s-2 px-4 py-2.5 text-body-sm transition-colors hover:bg-(--color-surface-warm) hover:text-(--color-text-primary) ${
+                                pathname === child.href
+                                  ? "border-(--color-action-secondary) bg-(--color-surface-warm) font-semibold text-(--color-text-primary)"
+                                  : "border-transparent text-(--color-text-secondary)"
+                              }`}
                             >
                               {child.label}
                             </Link>
@@ -162,10 +213,12 @@ export function Navbar() {
 
             {/* פתיחת תפריט מובייל */}
             <button
+              ref={triggerRef}
               type="button"
               onClick={() => setMenuOpen(true)}
               aria-label="פתיחת תפריט"
               aria-expanded={menuOpen}
+              aria-controls="mobile-menu"
               className={`grid h-11 w-11 place-items-center rounded-md transition-colors lg:hidden ${
                 solid ? "text-(--color-text-primary)" : "text-white"
               }`}
@@ -181,7 +234,7 @@ export function Navbar() {
 
       {/* פאנל מובייל — נכנס מימין */}
       <div
-        className={`fixed inset-0 z-[60] lg:hidden ${menuOpen ? "" : "pointer-events-none"}`}
+        className={`fixed inset-0 z-[60] overflow-hidden lg:hidden ${menuOpen ? "" : "pointer-events-none"}`}
         aria-hidden={!menuOpen}
       >
         <button
@@ -195,6 +248,11 @@ export function Navbar() {
         />
 
         <div
+          ref={panelRef}
+          id="mobile-menu"
+          role="dialog"
+          aria-modal={menuOpen || undefined}
+          aria-label="תפריט ניווט"
           style={{ transform: menuOpen ? "translateX(0)" : "translateX(100%)" }}
           className="absolute inset-y-0 start-0 flex h-full w-[min(20rem,85vw)] flex-col overflow-y-auto bg-(--color-surface) shadow-lg transition-transform duration-300 ease-out-expo"
         >
@@ -221,7 +279,12 @@ export function Navbar() {
                   <Link
                     href={item.href}
                     tabIndex={menuOpen ? 0 : -1}
-                    className="block rounded-md px-3 py-3 font-display text-h3 font-bold text-(--color-text-primary)"
+                    aria-current={isActive(item.href) ? "page" : undefined}
+                    className={`flex min-h-12 items-center rounded-md border-s-2 px-3 py-3 font-display text-h3 font-bold text-(--color-text-primary) ${
+                      isActive(item.href)
+                        ? "border-(--color-action-secondary) bg-(--color-surface-warm)"
+                        : "border-transparent"
+                    }`}
                   >
                     {item.label}
                   </Link>
@@ -232,7 +295,12 @@ export function Navbar() {
                           <Link
                             href={child.href}
                             tabIndex={menuOpen ? 0 : -1}
-                            className="block rounded-md px-2 py-2 text-body-sm text-(--color-text-secondary)"
+                            aria-current={pathname === child.href ? "page" : undefined}
+                            className={`flex min-h-11 items-center rounded-md px-2 py-2 text-body-sm ${
+                              pathname === child.href
+                                ? "font-semibold text-(--color-text-primary)"
+                                : "text-(--color-text-secondary)"
+                            }`}
                           >
                             {child.label}
                           </Link>

@@ -4,8 +4,7 @@ import { PageHero } from "@/components/sections/PageHero";
 import { Reveal } from "@/components/ui/Reveal";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { BentoGrid, BentoCell } from "@/components/ui/BentoGrid";
-import { StatCounter } from "@/components/ui/StatCounter";
-import { Placeholder } from "@/components/ui/Placeholder";
+import { Stat } from "@/components/ui/Stat";
 import { Button } from "@/components/ui/Button";
 import { Icon, type IconName } from "@/components/ui/icon";
 import { IMPACT, BRANCHES, BRANCH_DETAIL, DIGNITY_QUOTE, CTA, type BranchId } from "@/lib/content/site";
@@ -42,16 +41,7 @@ export default function ImpactPage() {
               index={i}
               className="border border-white/10 !bg-white/[0.04]"
             >
-              <span className="font-display text-stat font-black text-(--color-gold-400)">
-                {stat.value === "—" ? <span aria-hidden="true">—</span> : <StatCounter value={stat.value} />}
-              </span>
-              <span className="mt-3 text-body-sm text-(--color-navy-200)">
-                {stat.pending ? (
-                  <Placeholder needs={`impact-${i}`}>{stat.label}</Placeholder>
-                ) : (
-                  stat.label
-                )}
-              </span>
+              <Stat stat={stat} tone="dark" needs={`impact-${i}`} />
             </BentoCell>
           ))}
         </BentoGrid>
@@ -88,19 +78,17 @@ export default function ImpactPage() {
                 </h3>
               </div>
 
-              <ul className="grid grid-cols-3 gap-4 border-t border-(--color-border-subtle) pt-4">
+              <ul className="grid gap-5 border-t border-(--color-border-subtle) pt-5 sm:grid-cols-3 sm:gap-4">
                 {BRANCH_DETAIL[branch.id].stats.map((stat, j) => (
-                  <li key={stat.label} className="flex flex-col gap-1">
-                    <span className="font-display text-h3 font-bold" style={{ color: branch.textColor }}>
-                      {stat.value === "—" ? "—" : <StatCounter value={stat.value} />}
-                    </span>
-                    <span className="text-caption text-(--color-text-tertiary)">
-                      {stat.pending ? (
-                        <Placeholder needs={`${branch.id}-${j}`}>{stat.label}</Placeholder>
-                      ) : (
-                        stat.label
-                      )}
-                    </span>
+                  <li key={stat.label}>
+                    <Stat
+                      stat={stat}
+                      size="sm"
+                      tone="branch"
+                      color={branch.textColor}
+                      needs={`${branch.id}-${j}`}
+                      centerOnMobile
+                    />
                   </li>
                 ))}
               </ul>

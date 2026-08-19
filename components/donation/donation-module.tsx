@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { AmountSelector } from "@/components/donation/amount-selector";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/field";
+import { Placeholder } from "@/components/ui/Placeholder";
 import { getDonationProvider, type DonationFrequency } from "@/lib/donation/provider";
 import { trackEvent } from "@/lib/analytics/events";
 
@@ -49,10 +50,10 @@ export function DonationModule({ programId }: { programId?: string }) {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col gap-6 rounded-(--radius-lg) border border-(--color-border-subtle) bg-(--color-surface-raised) p-6 md:p-8"
+      className="flex flex-col gap-6 rounded-xl border border-(--color-border-subtle) bg-(--color-surface) p-6 shadow-bento md:p-8"
       aria-describedby={!provider.isConfigured ? "donation-provider-note" : undefined}
     >
-      <div className="flex rounded-(--radius-sm) border border-(--color-border-strong) p-1">
+      <div className="flex rounded-md border border-(--color-border-default) p-1">
         {(
           [
             { id: "one-time", label: "תרומה חד פעמית" },
@@ -67,9 +68,9 @@ export function DonationModule({ programId }: { programId?: string }) {
               if (opt.id === "monthly") trackEvent("recurring_selected", { programId });
             }}
             aria-pressed={frequency === opt.id}
-            className={`flex-1 rounded-[calc(var(--radius-sm)-2px)] py-2.5 text-sm font-medium transition-colors ${
+            className={`min-h-11 flex-1 rounded-sm px-2 text-body-sm font-medium transition-colors ${
               frequency === opt.id
-                ? "bg-(--color-navy-950) text-(--color-text-inverse)"
+                ? "bg-(--color-navy-900) text-(--color-text-inverse)"
                 : "text-(--color-text-secondary)"
             }`}
           >
@@ -88,7 +89,7 @@ export function DonationModule({ programId }: { programId?: string }) {
 
       {amount === "custom" ? (
         <div>
-          <label htmlFor="custom-amount" className="mb-1.5 block text-sm font-medium text-(--color-text-primary)">
+          <label htmlFor="custom-amount" className="mb-1.5 block text-body-sm font-medium text-(--color-text-primary)">
             סכום בשקלים
           </label>
           <Input
@@ -103,7 +104,7 @@ export function DonationModule({ programId }: { programId?: string }) {
       ) : null}
 
       {error ? (
-        <p role="alert" className="text-sm text-(--color-feedback-error)">
+        <p role="alert" className="text-body-sm text-(--color-feedback-error)">
           {error}
         </p>
       ) : null}
@@ -113,8 +114,11 @@ export function DonationModule({ programId }: { programId?: string }) {
       </Button>
 
       {!provider.isConfigured ? (
-        <p id="donation-provider-note" className="text-center text-xs text-(--color-text-muted)">
-          [נדרש אימות: חיבור לספק סליקה פעיל — כרגע מדובר בזרימה לדוגמה בלבד]
+        <p id="donation-provider-note" className="text-center text-caption text-(--color-text-tertiary)">
+          <Placeholder needs="payment-provider" note="ממתין לחיבור ספק הסליקה של העמותה">
+            חיבור הסליקה בהשלמה
+          </Placeholder>{" "}
+          — בשלב זה הטופס אינו מחייב בפועל.
         </p>
       ) : null}
     </form>
