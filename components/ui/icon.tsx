@@ -24,9 +24,51 @@ export type IconName =
   | "transparency"
   | "whatsapp"
   | "mail"
-  | "arch";
+  | "arch"
+  | "elder"
+  | "person"
+  | "hospital"
+  | "hands"
+  | "receipt"
+  | "chevron";
 
 const paths: Record<IconName, React.ReactNode> = {
+  elder: (
+    <>
+      <circle cx="11" cy="5" r="2.5" />
+      <path d="M11 8v7" />
+      <path d="M8 21l3-6 3 6" />
+      <path d="M8 11h6" />
+      <path d="M18 10v11" />
+    </>
+  ),
+  person: (
+    <>
+      <circle cx="12" cy="6" r="3" />
+      <path d="M6 21v-2a6 6 0 0 1 12 0v2" />
+    </>
+  ),
+  hospital: (
+    <>
+      <path d="M4 21V8l8-5 8 5v13" />
+      <path d="M12 10v6M9 13h6" />
+    </>
+  ),
+  hands: (
+    <>
+      <path d="M3 13l3-3 4 4" />
+      <path d="M21 13l-3-3-4 4" />
+      <path d="M8 14l4 4 4-4" />
+      <path d="M12 4v6" />
+    </>
+  ),
+  receipt: (
+    <>
+      <path d="M6 3h12v18l-3-2-3 2-3-2-3 2V3z" />
+      <path d="M9 8h6M9 12h6" />
+    </>
+  ),
+  chevron: <path d="M6 9l6 6 6-6" />,
   meal: (
     <>
       <circle cx="12" cy="12" r="8" />

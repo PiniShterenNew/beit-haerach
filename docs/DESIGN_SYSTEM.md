@@ -1,79 +1,100 @@
-# Design System
+# Design System — עזרת ישראל
 
-## Tokens
-Defined in `app/globals.css` as CSS custom properties, exposed to Tailwind
-utilities via `@theme inline` (so both `text-(--color-navy-950)` arbitrary
-syntax and canonical `text-navy-950` utilities resolve to the same value).
+## Thesis
 
-- Color: `--color-{navy,gold,stone,ivory,sage,clinic,kollel,yeshiva}-{...}`
-  plus semantic aliases `--color-{surface,text,border,action,feedback}-*`.
-- Radius: `--radius-{sm,md,lg}`.
-- Shadow: `--shadow-{sm,md}` (used sparingly — the brief calls for minimal
-  cardification, so shadows are reserved for the donation module and raised
-  surfaces only).
-- Motion: `--motion-{fast,base,slow}` + `--motion-ease`.
+> כי הארגון הזה הוא מעטפת קהילתית רב-דורית שבונה הגנה לאדם בגוף, ברוח ובחיים
+> היומיומיים — החוויה תרגיש כמו **מגזין מוסדי חם עם נשמה בוהמיינית**, באמצעות
+> שימוש חוזר ב**קשתות מעטפת, טיפוגרפיה סריפית כבדה, Bento Grid א-סימטרי
+> ומרחבי נשימה גדולים**, ותתנהג כמו **ספר שנפתח** — שכבה אחרי שכבה.
 
-## Components (`components/`)
-- `ui/button.tsx` — Button, 5 variants × 2 sizes, polymorphic (renders
-  `next/link` when `href` is passed).
-- `ui/field.tsx` — FormField, Input, Textarea, Select, Checkbox, Radio.
-- `ui/icon.tsx` — single SVG icon system, 25 glyphs, consistent 24×24
-  viewBox / 1.75 stroke / round joins, derived from the arch motif.
-- `ui/accordion.tsx` — accessible disclosure (FAQ, transparency).
-- `ui/section.tsx` — Section + SectionHeader page-rhythm primitives.
-- `ui/media-placeholder.tsx` — art-directed, aspect-ratio-locked image
-  placeholder (see docs/ASSET_MANIFEST.json for what each one is waiting on).
-- `brand/mark.tsx`, `brand/logo.tsx` — master symbol + lockups.
-- `sections/*` — ProgramCard, ProcessStep, Quote, TrustBadge, ImpactMetric,
-  StoryCard, DocumentLink, ProgramPageTemplate.
-- `donation/*` — AmountSelector, DonationModule (client, calls the provider
-  adapter in `lib/donation/provider.ts`).
-- `forms/*` — ContactForm, VolunteerForm, GetHelpForm (client, zod-validated,
-  post to route handlers under `app/api/*`).
-- `layout/*` — SkipLink, SiteHeader, MobileNav, SiteFooter.
+Style: **Editorial × Bohemian × Bento Grid**. RTL-first (`dir="rtl"`, `lang="he"`),
+logical CSS properties throughout.
 
-## Component states
-Every interactive control implements default / hover / focus-visible /
-active / disabled via Tailwind state variants and the global
-`:focus-visible` outline (`app/globals.css`); form controls additionally
-carry an `aria-invalid` + inline error state driven by zod.
+## Token architecture
 
-## Signature devices (v2)
-Added to move the system away from generic "SaaS template" tells — a
-uniform icon-in-a-circle badge on every card, identical grids repeated
-section after section, safe/flat type scale — toward something specific to
-this brand's one owned symbol, the arch:
+Two layers, both in `app/globals.css`:
 
-- **Arch framing.** `#arch-frame` (an `objectBoundingBox` `<clipPath>`
-  defined once in `app/layout.tsx`) clips the hero photo into the Mark's own
-  doorway silhouette instead of a rounded rectangle. It scales with the
-  element, so it works at any image aspect ratio.
-- **No icon badges.** `TrustBadge` and `ProgramCard` render icons bare —
-  larger, colored, no circular background — per `.icon-mark` in
-  `app/globals.css`. `ProgramCard` pairs its icon with a thin accent rule
-  instead of a filled chip.
-- **Ghost numerals.** `ProcessStep` renders its index as a large, pale
-  `.ghost-numeral` behind the icon/title rather than a small badge number —
-  a step counter that reads as typography, not UI chrome.
-- **Grain.** `body::before` in `app/globals.css` overlays a low-opacity
-  (`0.05`) SVG `feTurbulence` texture in `overlay` blend mode across every
-  page, breaking up flat digital-smooth surfaces without touching any
-  component's own styling.
-- **Editorial type scale.** `SectionHeader`, the hero H1, and `ImpactMetric`
-  all sit well above the original scale (hero uses
-  `clamp(2.75rem,8vw,6.5rem)`) — typography carries visual weight that used
-  to come from decoration. `ImpactMetric` intentionally caps out lower
-  (`text-3xl` → `lg:text-5xl`) because its values are currently
-  `[נדרש אימות]` placeholder strings, not short numerals; re-check that cap
-  once real figures land and short numbers can carry a bigger size safely.
-- **Broken grid rhythm.** The program card grid staggers alternating cards
-  down via `[&>*:nth-child(2n)]:lg:mt-12` at `lg` — a margin offset, not a
-  transform, so it never fights the card's own hover-lift transform.
+| Layer | Where | Purpose |
+|---|---|---|
+| **1 — Primitives** | `@theme { }` | Raw colour ramps, type scale, spacing, radii, shadows, easings. Generates Tailwind utilities (`bg-navy-900`, `text-h1`, `shadow-bento`, `ease-out-expo`, `max-w-content`). |
+| **2 — Semantic** | `:root { }` | The only tokens components should reference (`--color-canvas`, `--color-text-primary`, `--color-action-primary`, `--color-branch-*`). |
 
-## Responsive
-Mobile-first Tailwind breakpoints (`sm`, `md`, `lg`); grid/flex layouts
-collapse to a single column below `md`. See `docs/RESPONSIVE_SYSTEM.md`.
+Tailwind v4 is configured CSS-first — there is no `tailwind.config.ts`. Adding a
+token means adding a custom property to `@theme`.
+
+### Colour ramps
+`navy` (institutional trust) · `gold` (heritage) · `stone` (warmth) ·
+`sage` (community) · `calm` (health) · `terra` (bohemian accent). 50–900 each.
+
+### Branch colours
+Each branch carries two tones, and the distinction is load-bearing:
+
+- `--color-branch-*` — the full tone, for **fills and graphics only** (3:1 threshold).
+- `--color-branch-*-text` — a darker tone, for **any text in the branch colour**,
+  and for solid surfaces that carry white text.
+
+The full tones (e.g. gold-600 at 2.5:1 on white) do not reach 4.5:1 as text.
+Same reason `--color-text-accent` is gold-800 and `--color-text-tertiary` is
+stone-700 rather than the lighter steps.
+
+## Typography
+
+- **Display** — Frank Ruhl Libre 400/500/700/900. All headings, headline-first hierarchy.
+- **Body (he)** — Heebo 300/400/500/700, line-height 1.8.
+- **Body (en)** — Inter 400/500/600/700.
+
+Loaded via `next/font/google` with `display: swap`. Scale is fluid `clamp()`:
+`text-display`, `text-h1`–`text-h3`, `text-body-lg`/`body`/`body-sm`,
+`text-caption`, `text-overline`, `text-stat`.
+
+The scale is calibrated for Hebrew directly. **Do not add a `:lang(he)` rule that
+sets `font-size`** — `:lang(he) h1` (0,1,1) outranks `.text-h1` (0,1,0) and
+silently flattens every heading on the site.
+
+## Shape
+
+Radii: `sm` 6px · `md` 12px · `lg` 16px · `xl` 24px · `2xl` 32px · `pill`.
+**Iron rule: no square buttons.** Every button variant inherits `--radius-md` minimum.
+
+**The arch** is the signature element — envelope, gateway, protection. It appears
+via `.arch-image` (`--radius-arch`), `.arch-divider` (section transitions) and
+`.arch-badge` (icon frames). It carries the meaning, so it is used deliberately —
+roughly three to four times per page, not on every element.
+
+## Motion
+
+Durations `--duration-instant|fast|normal|slow|dramatic`; easings `ease-out-expo`,
+`ease-gentle`, `ease-in-out-soft`.
+
+- `.reveal` + `<Reveal>` — scroll fade-up via IntersectionObserver, stagger through
+  `--reveal-delay`, capped at 6 elements.
+- `.hero-in` — the hero is always in view, so it animates on paint (CSS animation
+  with `--hero-delay`), not on scroll.
+- `.lift` — hover elevation, applied only to cells that are actually links.
+- `<StatCounter>` — rAF count-up. Initial state is the **final** value, so SSR,
+  no-JS and reduced-motion all render the real number.
+
+All of it collapses under `prefers-reduced-motion: reduce`.
+
+## Layout
+
+Containers: `max-w-content` 80rem · `-wide` 72rem · `-default` 64rem · `-narrow` 42rem.
+Section rhythm: 96px desktop / 64px tablet / 48px mobile, via `<Section>`.
+
+**Bento grid** — 12 columns desktop → 6 tablet → 1 mobile.
+Spans: `wide` (8) · `medium` (6) · `narrow` (4) · `quarter` (3) · `full` (12), plus `tall`.
+Not every section is bento; it alternates with full editorial sections to create rhythm.
+
+## Unverified content
+
+`<Placeholder>` marks any number, name or legal detail that has not been confirmed
+(dashed underline + `title` + `data-needs`). Content flags these with
+`pending: true` in `lib/content/site.ts`. A public benevolent organisation must not
+render an unverified registration number as though it were confirmed.
 
 ## Accessibility
-Target WCAG 2.2 AA. See `docs/10_QA_AND_DEFINITION_OF_DONE.md` for the
-checklist and "Accessibility" in `BUILD_REPORT.md` for current status.
+
+WCAG 2.2 AA. Contrast verified against rendered output, not against the palette on
+paper. Skip link, visible focus ring (`--color-border-focus`, 2px offset),
+`aria-label` on icon-only controls, targets ≥24px (≥44px for navigation and
+mobile actions), and no horizontal overflow at 375/768/1440.

@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { BranchPage } from "@/components/sections/BranchPage";
 import { getBranch } from "@/lib/content/site";
 
-const branch = getBranch("dental");
+const branch = getBranch("community");
 
 export const metadata: Metadata = {
   title: branch?.name,
