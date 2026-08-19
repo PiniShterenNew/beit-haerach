@@ -15,7 +15,7 @@ export function Eyebrow({
 }) {
   const color =
     tone === "inverse"
-      ? "text-(--color-gold-300)"
+      ? "text-(--color-accent-on-deep)"
       : tone === "branch"
         ? "text-(--branch)"
         : "text-(--color-text-accent)";

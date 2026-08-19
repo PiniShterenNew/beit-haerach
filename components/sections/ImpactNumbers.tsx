@@ -16,7 +16,7 @@ import { IMPACT } from "@/lib/content/site";
 export function ImpactNumbers() {
   return (
     <Section tone="deep">
-      <Reveal className="mb-10 flex max-w-2xl flex-col gap-3 md:mb-14">
+      <Reveal className="section-head mx-auto flex max-w-2xl flex-col items-center gap-3 text-center sm:items-start sm:text-start">
         <Eyebrow tone="inverse">{IMPACT.eyebrow}</Eyebrow>
         <h2 className="font-display text-h1 text-white">{IMPACT.headline}</h2>
       </Reveal>
@@ -28,9 +28,9 @@ export function ImpactNumbers() {
             span="quarter"
             fill="deep"
             index={i}
-            className="border border-white/10 !bg-white/[0.04]"
+            className="items-center border border-white/10 !bg-white/[0.04] text-center sm:items-start sm:text-start"
           >
-            <span className="font-display text-stat font-black text-(--color-gold-400)">
+            <span className="font-display text-stat font-black text-(--color-accent-on-deep)">
               {stat.pending && stat.value === "—" ? (
                 <span aria-hidden="true">—</span>
               ) : (

@@ -20,7 +20,7 @@ export default async function ThankYouPage({
   return (
     <Section tone="canvas" width="narrow" className="text-center">
       <div className="flex flex-col items-center gap-6">
-        <SectionDivider tone="gold" />
+        <SectionDivider tone="terra" />
 
         <span className="grid h-16 w-16 place-items-center rounded-full bg-(--color-sage-100) text-(--color-sage-700)">
           <Icon name="check" className="h-8 w-8" />

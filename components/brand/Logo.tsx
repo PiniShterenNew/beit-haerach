@@ -5,10 +5,17 @@ import { SITE } from "@/lib/content/site";
  *
  * גיאומטרי בלבד, לפי ה-anti-traits בבריף: בלי לב, בלי ידיים, בלי ניצוצות.
  * הקשת החיצונית היא ההגנה, הפנימית היא הדלת שנשארת פתוחה.
+ * צבעים: נייבי + טרה בלבד — אין זהב בסמל הראשי.
+ *
+ * TODO — לוגו סופי: זהו placeholder גיאומטרי, לא ה-asset הסופי. כשיתקבל
+ * public/assets/brand/logo-mark.svg, יש להחליף את ה-<svg> כאן ב-<Image>
+ * שטוען את הקובץ (או NEXT_PUBLIC אחר), בלי לשנות את חתימת הקומפוננטה —
+ * כל קריאה ל-<Logo>/<LogoMark> בשאר האתר תמשיך לעבוד ללא שינוי.
+ * יש להבטיח תמיכה בארבע הגרסאות: brand · monochrome navy · white/inverse · mark only.
  */
 export function LogoMark({ className, tone = "brand" }: { className?: string; tone?: "brand" | "inverse" }) {
   const shell = tone === "inverse" ? "var(--color-stone-50)" : "var(--color-navy-900)";
-  const door = tone === "inverse" ? "var(--color-gold-400)" : "var(--color-gold-600)";
+  const door = tone === "inverse" ? "var(--color-terra-300)" : "var(--color-terra-accessible)";
 
   return (
     <svg viewBox="0 0 48 56" className={className} fill="none" aria-hidden="true">
@@ -33,7 +40,7 @@ export function Logo({
   className?: string;
 }) {
   const nameColor = tone === "inverse" ? "text-(--color-text-inverse)" : "text-(--color-text-primary)";
-  const subColor = tone === "inverse" ? "text-(--color-gold-300)" : "text-(--color-text-accent)";
+  const subColor = tone === "inverse" ? "text-(--color-accent-on-deep)" : "text-(--color-text-accent)";
 
   return (
     <span className={`inline-flex items-center gap-2.5 ${className ?? ""}`}>
@@ -42,7 +49,8 @@ export function Logo({
         <span className={`font-display text-xl font-bold tracking-tight ${nameColor}`}>
           {SITE.name}
         </span>
-        <span className={`mt-1 text-[0.6875rem] font-medium tracking-[0.06em] ${subColor}`}>
+        {/* Tagline: בדסקטופ בלבד. ב-navbar המובייל מוצג רק סמל + שם. */}
+        <span className={`mt-1 hidden text-[0.6875rem] font-medium tracking-[0.06em] sm:block ${subColor}`}>
           {SITE.tagline}
         </span>
       </span>

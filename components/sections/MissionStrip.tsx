@@ -10,7 +10,7 @@ import { MISSION } from "@/lib/content/site";
  */
 export function MissionStrip() {
   return (
-    <Section tone="deep" width="default" className="py-14 md:py-18 lg:py-22">
+    <Section tone="deep" width="default" compact>
       <Reveal className="flex flex-col items-center gap-6 text-center">
         <p className="font-display text-h2 font-bold text-white text-balance">{MISSION}</p>
         <span aria-hidden="true" className="h-0.5 w-15 bg-(--color-action-secondary)" />

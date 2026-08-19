@@ -18,7 +18,14 @@ import { BRANCH_DETAIL, CTA, type Branch } from "@/lib/content/site";
  * מה כולל, סטטיסטיקות, עדויות ו-CTA ייעודי — כדי שהאתר לא ייקרא כארבעה
  * אתרים נפרדים. מה שמשתנה בין הזרועות הוא הצבע והתוכן בלבד.
  */
-export function BranchPage({ branch }: { branch: Branch }) {
+export function BranchPage({
+  branch,
+  children,
+}: {
+  branch: Branch;
+  /** תוכן ייעודי לזרוע — לדוגמה מדריך המרפאות בעמוד השיניים */
+  children?: React.ReactNode;
+}) {
   const detail = BRANCH_DETAIL[branch.id];
 
   return (
@@ -55,7 +62,7 @@ export function BranchPage({ branch }: { branch: Branch }) {
 
       {/* מה כולל */}
       <Section tone="surface">
-        <Reveal className="mb-10 flex max-w-2xl flex-col gap-3 md:mb-14">
+        <Reveal className="section-head mx-auto flex max-w-2xl flex-col items-center gap-3 text-center sm:items-start sm:text-start">
           <Eyebrow>מה כולל</Eyebrow>
           <h2 className="font-display text-h2">איך זה עובד בפועל</h2>
         </Reveal>
@@ -76,7 +83,7 @@ export function BranchPage({ branch }: { branch: Branch }) {
                 <Icon name={item.icon as IconName} className="h-5 w-5" strokeWidth={1.6} />
               </span>
               <div>
-                <h3 className="font-display text-h3">{item.title}</h3>
+                <h3 className="font-heading text-h3">{item.title}</h3>
                 <p className="mt-1 text-body-sm text-(--color-text-secondary)">{item.body}</p>
               </div>
             </Reveal>
@@ -84,9 +91,11 @@ export function BranchPage({ branch }: { branch: Branch }) {
         </ul>
       </Section>
 
+      {children}
+
       {/* סטטיסטיקות */}
       <Section tone="deep">
-        <Reveal className="mb-10 flex max-w-2xl flex-col gap-3">
+        <Reveal className="section-head mx-auto flex max-w-2xl flex-col items-center gap-3 text-center sm:items-start sm:text-start">
           <Eyebrow tone="inverse">במספרים</Eyebrow>
           <h2 className="font-display text-h2 text-white">היקף הפעילות</h2>
         </Reveal>
@@ -98,9 +107,9 @@ export function BranchPage({ branch }: { branch: Branch }) {
               span="narrow"
               fill="deep"
               index={i}
-              className="border border-white/10 !bg-white/[0.04]"
+              className="items-center border border-white/10 !bg-white/[0.04] text-center sm:items-start sm:text-start"
             >
-              <span className="font-display text-stat font-black text-(--color-gold-400)">
+              <span className="font-display text-stat font-black text-(--color-accent-on-deep)">
                 {stat.value === "—" ? <span aria-hidden="true">—</span> : <StatCounter value={stat.value} />}
               </span>
               <span className="mt-3 text-body-sm text-(--color-navy-200)">

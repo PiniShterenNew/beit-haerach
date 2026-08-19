@@ -38,7 +38,7 @@ export default function ContactPage() {
                   key={channel.label}
                   className="flex items-start gap-4 border-b border-(--color-border-subtle) py-4"
                 >
-                  <span className="arch-badge shrink-0 bg-(--color-surface-gold) text-(--color-text-accent)" aria-hidden="true">
+                  <span className="arch-badge shrink-0 bg-(--color-surface-accent) text-(--color-text-accent)" aria-hidden="true">
                     <Icon name={channel.icon} className="h-5 w-5" strokeWidth={1.6} />
                   </span>
                   <div>

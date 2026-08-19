@@ -108,7 +108,7 @@ export function DonationModule({ programId }: { programId?: string }) {
         </p>
       ) : null}
 
-      <Button type="submit" variant="secondary" disabled={submitting} className="w-full">
+      <Button type="submit" variant="donate" disabled={submitting} className="w-full">
         {submitting ? "מעביר אתכם לתשלום…" : `לתרומה של ₪${resolvedAmount || ""}`}
       </Button>
 

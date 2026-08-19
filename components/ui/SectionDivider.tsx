@@ -8,15 +8,18 @@ export function SectionDivider({
   tone = "default",
   className,
 }: {
-  tone?: "default" | "gold" | "inverse";
+  /** "gold" נשאר למקטעי מורשת בלבד. "terra" הוא האקסנט הכללי החדש. */
+  tone?: "default" | "gold" | "terra" | "inverse";
   className?: string;
 }) {
   const color =
     tone === "gold"
-      ? "text-(--color-action-secondary)"
-      : tone === "inverse"
-        ? "text-(--color-gold-300)"
-        : "text-(--color-border-default)";
+      ? "text-(--color-gold-600)"
+      : tone === "terra"
+        ? "text-(--color-action-secondary)"
+        : tone === "inverse"
+          ? "text-(--color-accent-on-deep)"
+          : "text-(--color-border-default)";
 
   return <div aria-hidden="true" className={`arch-divider ${color} ${className ?? ""}`} />;
 }

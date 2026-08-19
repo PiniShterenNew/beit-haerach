@@ -1,11 +1,11 @@
 import Link from "next/link";
 import type { ComponentPropsWithoutRef, ReactNode } from "react";
 
-type Variant = "primary" | "secondary" | "ghost" | "ghostInverse" | "donate" | "donateSm";
+/* שלוש היררכיות בלבד: primary (נייבי) · donate (טרה כהה) · ghost/ghostInverse (שקוף). */
+type Variant = "primary" | "ghost" | "ghostInverse" | "donate" | "donateSm";
 
 const variantClass: Record<Variant, string> = {
   primary: "btn btn--primary",
-  secondary: "btn btn--secondary",
   ghost: "btn btn--ghost",
   ghostInverse: "btn btn--ghost-inverse",
   donate: "btn btn--donate",

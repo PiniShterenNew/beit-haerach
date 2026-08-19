@@ -40,9 +40,9 @@ export default function ImpactPage() {
               span="quarter"
               fill="deep"
               index={i}
-              className="border border-white/10 !bg-white/[0.04]"
+              className="items-center border border-white/10 !bg-white/[0.04] text-center sm:items-start sm:text-start"
             >
-              <span className="font-display text-stat font-black text-(--color-gold-400)">
+              <span className="font-display text-stat font-black text-(--color-accent-on-deep)">
                 {stat.value === "—" ? <span aria-hidden="true">—</span> : <StatCounter value={stat.value} />}
               </span>
               <span className="mt-3 text-body-sm text-(--color-navy-200)">
@@ -63,7 +63,7 @@ export default function ImpactPage() {
 
       {/* פירוט לפי זרוע */}
       <Section tone="canvas">
-        <Reveal className="mb-10 flex max-w-2xl flex-col gap-3 md:mb-14">
+        <Reveal className="section-head mx-auto flex max-w-2xl flex-col items-center gap-3 text-center sm:items-start sm:text-start">
           <Eyebrow>לפי זרוע</Eyebrow>
           <h2 className="font-display text-h2">איפה זה מתבטא בפועל</h2>
         </Reveal>
@@ -83,7 +83,7 @@ export default function ImpactPage() {
                 >
                   <Icon name={branchIcon[branch.id]} className="h-5 w-5" strokeWidth={1.6} />
                 </span>
-                <h3 className="font-display text-h3" style={{ color: branch.textColor }}>
+                <h3 className="font-heading text-h3" style={{ color: branch.textColor }}>
                   {branch.name}
                 </h3>
               </div>
