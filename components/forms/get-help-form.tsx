@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { FormField, Input, Textarea, Select, Checkbox } from "@/components/ui/field";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/icon";
 import { getHelpSchema, fieldErrors } from "@/lib/validation/forms";
 import { trackEvent } from "@/lib/analytics/events";
@@ -120,7 +120,7 @@ export function GetHelpForm() {
         </p>
       ) : null}
 
-      <Button type="submit" size="lg" disabled={status === "submitting"} className="self-start">
+      <Button type="submit" disabled={status === "submitting"} className="self-start">
         {status === "submitting" ? "שולח…" : "שליחת הפנייה"}
       </Button>
     </form>

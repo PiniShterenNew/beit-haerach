@@ -1,14 +1,14 @@
 import type { MetadataRoute } from "next";
-import { SITE } from "@/lib/content/site";
+import { SITE, BRANCHES } from "@/lib/content/site";
 
+/** נגזר מ-BRANCHES כדי שהוספת זרוע לא תשאיר את המפה מאחור. */
 const routes = [
   "",
   "/about",
   "/programs",
-  "/programs/guesthouse",
-  "/programs/dental",
-  "/programs/kollels",
-  "/programs/yeshiva",
+  ...BRANCHES.map((branch) => branch.href),
+  "/impact",
+  "/legacy",
   "/stories",
   "/volunteer",
   "/get-help",

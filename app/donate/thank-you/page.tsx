@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import { Section } from "@/components/ui/section";
+import { Section } from "@/components/layout/Section";
 import { Icon } from "@/components/ui/icon";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/Button";
+import { SectionDivider } from "@/components/ui/SectionDivider";
 
 export const metadata: Metadata = {
   title: "תודה על התרומה",
@@ -17,22 +18,34 @@ export default async function ThankYouPage({
   const isMonthly = frequency === "monthly";
 
   return (
-    <Section className="pt-16 md:pt-24">
-      <div className="mx-auto flex max-w-xl flex-col items-center gap-6 text-center">
-        <span className="flex h-16 w-16 items-center justify-center rounded-full bg-(--color-feedback-success-bg) text-(--color-feedback-success)">
+    <Section tone="canvas" width="narrow" className="text-center">
+      <div className="flex flex-col items-center gap-6">
+        <SectionDivider tone="gold" />
+
+        <span className="grid h-16 w-16 place-items-center rounded-full bg-(--color-sage-100) text-(--color-sage-700)">
           <Icon name="check" className="h-8 w-8" />
         </span>
-        <h1 className="font-display text-3xl md:text-4xl">תודה רבה על התרומה</h1>
-        <p className="text-base leading-relaxed text-(--color-text-secondary)">
-          {amount ? `תרומתכם בסך ₪${amount}` : "תרומתכם"} {isMonthly ? "כתרומה חודשית קבועה " : ""}
-          עוזרת לנו להמשיך את הפעילות היומיומית של כל תוכניות המרכז הקהילתי.
+
+        <h1 className="font-display text-h1">תודה רבה</h1>
+
+        <p className="text-body-lg text-(--color-text-secondary)">
+          {amount
+            ? `התרומה שלכם בסך ${amount} ₪ ${isMonthly ? "מדי חודש " : ""}התקבלה.`
+            : "התרומה שלכם התקבלה."}{" "}
+          היא נכנסת ישירות לפעילות היומיומית של המעטפת.
         </p>
-        <p className="text-xs text-(--color-text-muted)">
-          [נדרש אימות: זהו עמוד תודה לדוגמה — טרם חובר ספק סליקה אמיתי, ולכן לא בוצע חיוב בפועל.]
+
+        <p className="text-body-sm text-(--color-text-tertiary)">
+          אישור וקבלה יישלחו לכתובת הדוא״ל שהוזנה.
         </p>
-        <div className="flex gap-3 pt-2">
-          <Button href="/" variant="secondary">חזרה לעמוד הבית</Button>
-          <Button href="/stories" variant="ghost">קריאת סיפורים נוספים</Button>
+
+        <div className="flex w-full flex-col gap-3 pt-2 sm:w-auto sm:flex-row sm:justify-center">
+          <Button href="/" variant="primary" blockOnMobile>
+            חזרה לדף הבית
+          </Button>
+          <Button href="/programs" variant="ghost" blockOnMobile>
+            לאן זה הולך
+          </Button>
         </div>
       </div>
     </Section>

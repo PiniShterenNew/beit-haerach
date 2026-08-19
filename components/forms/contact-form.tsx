@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { FormField, Input, Textarea } from "@/components/ui/field";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/icon";
 import { contactSchema, fieldErrors } from "@/lib/validation/forms";
 
@@ -108,7 +108,7 @@ export function ContactForm() {
         </p>
       ) : null}
 
-      <Button type="submit" size="lg" disabled={status === "submitting"} className="self-start">
+      <Button type="submit" disabled={status === "submitting"} className="self-start">
         {status === "submitting" ? "שולח…" : "שליחת הפנייה"}
       </Button>
     </form>
