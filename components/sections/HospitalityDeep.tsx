@@ -2,9 +2,8 @@ import { Section } from "@/components/layout/Section";
 import { Reveal } from "@/components/ui/Reveal";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { ArchImage } from "@/components/ui/ArchImage";
-import { StatCounter } from "@/components/ui/StatCounter";
+import { Stat } from "@/components/ui/Stat";
 import { Button } from "@/components/ui/Button";
-import { Placeholder } from "@/components/ui/Placeholder";
 import { HOSPITALITY, BRANCHES } from "@/lib/content/site";
 
 /**
@@ -50,17 +49,13 @@ export function HospitalityDeep() {
       {/* סטטיסטיקות */}
       <div className="mt-14 grid gap-4 border-t border-(--color-border-subtle) pt-10 sm:grid-cols-3 md:mt-18">
         {HOSPITALITY.stats.map((stat, i) => (
-          <Reveal key={stat.label} index={i} className="flex flex-col gap-1">
-            <span className="font-display text-h1 font-black text-(--color-branch-hospitality)">
-              <StatCounter value={stat.value} />
-            </span>
-            <span className="text-body-sm text-(--color-text-secondary)">
-              {stat.pending ? (
-                <Placeholder needs={`hospitality-${i}`}>{stat.label}</Placeholder>
-              ) : (
-                stat.label
-              )}
-            </span>
+          <Reveal key={stat.label} index={i}>
+            <Stat
+              stat={stat}
+              tone="branch"
+              color="var(--color-branch-hospitality-text)"
+              needs={`hospitality-${i}`}
+            />
           </Reveal>
         ))}
       </div>

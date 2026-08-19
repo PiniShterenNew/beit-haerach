@@ -32,7 +32,7 @@ export function Accordion({ items }: { items: AccordionItem[] }) {
                 <span className="text-base font-medium text-(--color-text-primary)">{item.question}</span>
                 <Icon
                   name="arrow"
-                  className={`h-4 w-4 shrink-0 text-(--color-text-muted) transition-transform duration-(--motion-base) ${
+                  className={`h-4 w-4 shrink-0 text-(--color-text-tertiary) transition-transform duration-(--motion-base) ${
                     open ? "-rotate-90" : "rotate-90"
                   }`}
                 />

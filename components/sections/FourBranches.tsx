@@ -73,8 +73,15 @@ export function FourBranches() {
         <BranchCell branch={dental} index={1} />
 
         {/* תא סטטיסטיקה */}
-        <BentoCell span="narrow" fill="deep" index={2}>
-          <p className="text-overline font-body font-medium text-(--color-gold-300)">פועלים כמעט כל השנה</p>
+        <BentoCell
+          span="narrow"
+          fill="deep"
+          index={2}
+          className="items-center text-center md:items-start md:text-start"
+        >
+          <p className="text-overline font-body font-medium text-(--color-gold-300)">
+            פועלים כמעט כל השנה
+          </p>
           <p className="mt-auto pt-6 font-display text-stat font-black text-white" dir="ltr">
             345
           </p>

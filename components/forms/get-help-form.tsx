@@ -115,12 +115,12 @@ export function GetHelpForm() {
       ) : null}
 
       {status === "error" ? (
-        <p role="alert" className="text-sm text-(--color-feedback-error)">
+        <p role="alert" className="text-body-sm text-(--color-feedback-error)">
           משהו השתבש בשליחה. אפשר לנסות שוב, או להתקשר ישירות — הפרטים בעמוד יצירת הקשר.
         </p>
       ) : null}
 
-      <Button type="submit" disabled={status === "submitting"} className="self-start">
+      <Button type="submit" disabled={status === "submitting"} className="w-full sm:w-auto sm:self-start">
         {status === "submitting" ? "שולח…" : "שליחת הפנייה"}
       </Button>
     </form>

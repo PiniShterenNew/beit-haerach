@@ -2,8 +2,10 @@
 
 import { useId, type ComponentPropsWithoutRef } from "react";
 
+/* אותו רדיוס, אותו גובה מינימלי ואותה טיפוגרפיה כמו .btn — כדי ששדה
+   וכפתור שיושבים זה מתחת לזה ייראו כמערכת אחת. */
 const controlBase =
-  "w-full rounded-(--radius-sm) border border-(--color-border-strong) bg-(--color-surface-raised) px-3.5 py-2.5 text-[0.95rem] text-(--color-text-primary) placeholder:text-(--color-text-muted) transition-colors focus-visible:border-(--color-navy-950)";
+  "w-full min-h-11 rounded-(--radius-md) border border-(--color-border-default) bg-(--color-surface) px-4 py-2.5 text-body text-(--color-text-primary) placeholder:text-(--color-text-tertiary) transition-colors hover:border-(--color-border-strong) focus-visible:border-(--color-action-primary)";
 
 export function FormField({
   label,
@@ -25,18 +27,18 @@ export function FormField({
 
   return (
     <div className="flex flex-col gap-1.5">
-      <label htmlFor={id} className="text-sm font-medium text-(--color-text-primary)">
+      <label htmlFor={id} className="text-body-sm font-medium text-(--color-text-primary)">
         {label}
         {required ? <span className="text-(--color-feedback-error)"> *</span> : null}
       </label>
       {children({ id, describedBy, invalid: Boolean(error) })}
       {hint && !error ? (
-        <p id={hintId} className="text-xs text-(--color-text-muted)">
+        <p id={hintId} className="text-caption text-(--color-text-tertiary)">
           {hint}
         </p>
       ) : null}
       {error ? (
-        <p id={errorId} role="alert" className="text-xs text-(--color-feedback-error)">
+        <p id={errorId} role="alert" className="text-caption text-(--color-feedback-error)">
           {error}
         </p>
       ) : null}
@@ -85,14 +87,14 @@ export function Checkbox({
 }: ComponentPropsWithoutRef<"input"> & { label: string }) {
   const id = useId();
   return (
-    <div className="flex items-center gap-2.5">
+    <div className="flex min-h-11 items-center gap-2.5">
       <input
         id={id}
         type="checkbox"
-        className="h-5 w-5 rounded-(--radius-sm) border-(--color-border-strong) accent-(--color-navy-950)"
+        className="h-5 w-5 rounded-(--radius-sm) border-(--color-border-strong) accent-(--color-navy-900)"
         {...rest}
       />
-      <label htmlFor={id} className="text-sm text-(--color-text-secondary)">
+      <label htmlFor={id} className="text-body-sm text-(--color-text-secondary)">
         {label}
       </label>
     </div>
@@ -105,14 +107,14 @@ export function Radio({
 }: ComponentPropsWithoutRef<"input"> & { label: string }) {
   const id = useId();
   return (
-    <div className="flex items-center gap-2.5">
+    <div className="flex min-h-11 items-center gap-2.5">
       <input
         id={id}
         type="radio"
-        className="h-5 w-5 border-(--color-border-strong) accent-(--color-navy-950)"
+        className="h-5 w-5 border-(--color-border-strong) accent-(--color-navy-900)"
         {...rest}
       />
-      <label htmlFor={id} className="text-sm text-(--color-text-secondary)">
+      <label htmlFor={id} className="text-body-sm text-(--color-text-secondary)">
         {label}
       </label>
     </div>

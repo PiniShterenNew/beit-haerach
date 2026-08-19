@@ -70,7 +70,7 @@ export default function DonatePage() {
             </div>
           </Reveal>
 
-          <Reveal index={1} className="rounded-xl border border-(--color-border-subtle) bg-(--color-surface) p-6 shadow-bento md:p-8">
+          <Reveal index={1}>
             <DonationModule />
           </Reveal>
         </div>
