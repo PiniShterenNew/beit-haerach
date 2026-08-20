@@ -25,6 +25,7 @@ export function Section({
   className,
   style,
   grain = false,
+  compact = false,
 }: {
   children: ReactNode;
   tone?: Tone;
@@ -34,12 +35,14 @@ export function Section({
   style?: CSSProperties;
   /** שכבת גרעין נייר — למקטעי מורשת */
   grain?: boolean;
+  /** ריווח מצומצם — למקטעים בין שני מקטעים גדולים */
+  compact?: boolean;
 }) {
   return (
     <section
       id={id}
       style={style}
-      className={`relative py-12 md:py-16 lg:py-24 ${toneClass[tone]} ${className ?? ""}`}
+      className={`relative ${compact ? "section-compact" : "section"} ${toneClass[tone]} ${className ?? ""}`}
     >
       {grain ? (
         <span

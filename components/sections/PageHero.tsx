@@ -26,7 +26,7 @@ export function PageHero({
   children?: React.ReactNode;
 }) {
   return (
-    <section className="relative border-b border-(--color-border-subtle) bg-(--color-surface-warm) py-10 md:py-14 lg:py-18">
+    <section className="section-compact relative border-b border-(--color-border-subtle) bg-(--color-surface-warm)">
       {/* פס הזרוע */}
       <span
         aria-hidden="true"
@@ -36,7 +36,7 @@ export function PageHero({
 
       <Container>
         {breadcrumb?.length ? (
-          <nav aria-label="מיקום בעמוד" className="mb-6">
+          <nav aria-label="מיקום בעמוד" className="mb-6 hidden sm:block">
             <ol className="flex flex-wrap items-center gap-1.5 text-caption text-(--color-text-tertiary)">
               <li>
                 <Link href="/" className="inline-flex min-h-6 items-center py-1 transition-colors hover:text-(--color-text-primary)">
@@ -58,7 +58,7 @@ export function PageHero({
           </nav>
         ) : null}
 
-        <div className="flex max-w-3xl flex-col gap-4">
+        <div className="mx-auto flex max-w-3xl flex-col items-center gap-4 text-center sm:items-start sm:text-start">
           {eyebrow ? (
             <p
               className="text-overline font-body font-medium"
@@ -70,7 +70,7 @@ export function PageHero({
 
           <h1 className="font-display text-h1">{title}</h1>
 
-          {lede ? <p className="text-body-lg text-(--color-text-secondary)">{lede}</p> : null}
+          {lede ? <p className="max-w-[38ch] text-body-lg text-(--color-text-secondary)">{lede}</p> : null}
 
           {children}
         </div>

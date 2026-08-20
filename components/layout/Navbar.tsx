@@ -221,7 +221,7 @@ export function Navbar() {
                   <Link
                     href={item.href}
                     tabIndex={menuOpen ? 0 : -1}
-                    className="block rounded-md px-3 py-3 font-display text-h3 font-bold text-(--color-text-primary)"
+                    className="block rounded-md px-3 py-3 font-heading text-h3 font-bold text-(--color-text-primary)"
                   >
                     {item.label}
                   </Link>

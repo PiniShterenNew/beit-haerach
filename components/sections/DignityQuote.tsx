@@ -14,7 +14,7 @@ export function DignityQuote() {
   return (
     <Section tone="warm" width="narrow" className="text-center">
       <Reveal as="figure" className="m-0 flex flex-col items-center gap-8">
-        <SectionDivider tone="gold" />
+        <SectionDivider tone="terra" />
 
         <blockquote className="font-display text-h2 font-bold text-balance">
           {DIGNITY_QUOTE.text}

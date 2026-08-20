@@ -324,6 +324,60 @@ export const BRANCH_DETAIL: Record<BranchId, BranchDetail> = {
   },
 };
 
+/* --------------------------------------------------------------------------
+   מרפאות השיניים — פירוט לפי סניף
+   מבוסס על רשימה פנימית שנמסרה לצורך האתר. שמות ותפקידים מוצגים כפי
+   שנמסרו; מומלץ לאשר מול הארגון לפני פרסום סופי.
+   -------------------------------------------------------------------------- */
+
+export interface ClinicStaffMember {
+  name: string;
+  role: string;
+}
+
+export interface DentalClinic {
+  city: string;
+  /** מספר טלפון מוצג (RTL-friendly, לא dir=ltr) */
+  phone: string;
+  /** מספר נקי ל-tel:/wa.me, בלי מקפים */
+  phoneDigits: string;
+  whatsapp: boolean;
+  staff: ClinicStaffMember[];
+}
+
+export const DENTAL_CLINICS: DentalClinic[] = [
+  {
+    city: "צפת",
+    phone: "077-501-5751",
+    phoneDigits: "0775015751",
+    whatsapp: true,
+    staff: [
+      { name: "ד״ר שלמה גוטרמן", role: "רפואת שיניים — מבוגרים ובני נוער" },
+      { name: "ד״ר זאהר", role: "רפואת שיניים — מבוגרים ובני נוער" },
+      { name: "ד״ר יבגני כנל", role: "שתלים ותותבות" },
+      { name: "ד״ר ליאל", role: "רפואת שיניים לנשים — מבוגרות ובנות נוער" },
+      { name: "ד״ר רושדי", role: "אורתודנטיה (יישור שיניים)" },
+      { name: "חיה גאנם", role: "שיננית" },
+      { name: "ד״ר אירא סובח", role: "רפואת שיניים לילדים" },
+    ],
+  },
+  {
+    city: "ביתר עילית",
+    phone: "02-580-8852",
+    phoneDigits: "0258088852",
+    whatsapp: false,
+    staff: [
+      { name: "ד״ר מיה", role: "רפואת שיניים לילדים" },
+      { name: "ד״ר שטיינהוף", role: "רפואת שיניים לילדים" },
+      { name: "ד״ר סינגין", role: "רפואת שיניים — ילדים, בני נוער ומבוגרים" },
+      { name: "יוכבד טלר", role: "שיננית" },
+      { name: "ד״ר יצקוביץ", role: "שיקום פה — מבוגרים" },
+      { name: "ד״ר עבאס", role: "רפואת שיניים — מבוגרים ובני נוער, שתלים ותותבות" },
+      { name: "ד״ר אינה ליפשיץ", role: "אורתודנטיה (יישור שיניים)" },
+    ],
+  },
+];
+
 export function getBranch(slug: string): Branch | undefined {
   return BRANCHES.find((b) => b.slug === slug);
 }

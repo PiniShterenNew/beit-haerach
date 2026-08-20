@@ -22,7 +22,7 @@ export function Footer() {
                 href={`tel:${SITE.phone.value.replace(/-/g, "")}`}
                 className="inline-flex items-center gap-2 text-(--color-navy-100) transition-colors hover:text-white"
               >
-                <Icon name="phone" className="h-4 w-4 shrink-0 text-(--color-gold-400)" />
+                <Icon name="phone" className="h-4 w-4 shrink-0 text-(--color-accent-on-deep)" />
                 <Placeholder needs="phone">{SITE.phone.value}</Placeholder>
               </a>
             </li>
@@ -31,12 +31,12 @@ export function Footer() {
                 href={`mailto:${SITE.email.value}`}
                 className="inline-flex items-center gap-2 text-(--color-navy-100) transition-colors hover:text-white"
               >
-                <Icon name="mail" className="h-4 w-4 shrink-0 text-(--color-gold-400)" />
+                <Icon name="mail" className="h-4 w-4 shrink-0 text-(--color-accent-on-deep)" />
                 <Placeholder needs="email">{SITE.email.value}</Placeholder>
               </a>
             </li>
             <li className="inline-flex items-center gap-2 text-(--color-navy-100)">
-              <Icon name="location" className="h-4 w-4 shrink-0 text-(--color-gold-400)" />
+              <Icon name="location" className="h-4 w-4 shrink-0 text-(--color-accent-on-deep)" />
               <Placeholder needs="address">{SITE.address.value}</Placeholder>
             </li>
           </ul>
@@ -44,7 +44,7 @@ export function Footer() {
 
         {/* עמודה 2 — ניווט */}
         <nav aria-label="קישורים באתר" className="flex flex-col gap-4">
-          <h2 className="text-overline font-body font-medium text-(--color-gold-300)">ניווט מהיר</h2>
+          <h2 className="text-overline font-body font-medium text-(--color-accent-on-deep)">ניווט מהיר</h2>
           <ul className="grid grid-cols-2 gap-x-4 gap-y-2.5 lg:grid-cols-1">
             {FOOTER_LINKS.map((link) => (
               <li key={link.href}>
@@ -61,7 +61,7 @@ export function Footer() {
 
         {/* עמודה 3 — זרועות + תרומה */}
         <div className="flex flex-col gap-4">
-          <h2 className="text-overline font-body font-medium text-(--color-gold-300)">תחומי פעילות</h2>
+          <h2 className="text-overline font-body font-medium text-(--color-accent-on-deep)">תחומי פעילות</h2>
           <ul className="flex flex-col gap-2.5">
             {BRANCHES.map((branch) => (
               <li key={branch.id}>
@@ -76,7 +76,7 @@ export function Footer() {
           </ul>
 
           <div className="mt-2">
-            <Button href="/donate" variant="secondary" blockOnMobile>
+            <Button href="/donate" variant="donate" blockOnMobile>
               {CTA.donate}
             </Button>
           </div>

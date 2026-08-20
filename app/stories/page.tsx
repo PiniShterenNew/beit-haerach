@@ -40,7 +40,7 @@ export default function StoriesPage() {
 
       {/* מי מגיע */}
       <Section tone="surface">
-        <Reveal className="mb-10 flex max-w-2xl flex-col gap-3">
+        <Reveal className="section-head mx-auto flex max-w-2xl flex-col items-center gap-3 text-center sm:items-start sm:text-start">
           <h2 className="font-display text-h2">{WHO_WE_HELP.headline}</h2>
         </Reveal>
 
@@ -52,7 +52,7 @@ export default function StoriesPage() {
               index={i}
               className="border-b border-(--color-border-subtle) py-5"
             >
-              <h3 className="font-display text-h3">{item.label}</h3>
+              <h3 className="font-heading text-h3">{item.label}</h3>
               <p className="mt-1 text-body-sm text-(--color-text-secondary)">{item.note}</p>
             </Reveal>
           ))}

@@ -14,7 +14,7 @@ import { WHO_WE_HELP } from "@/lib/content/site";
 export function WhoWeHelp() {
   return (
     <Section tone="canvas">
-      <Reveal className="mb-10 flex max-w-2xl flex-col gap-3 md:mb-14">
+      <Reveal className="section-head mx-auto flex max-w-2xl flex-col items-center gap-3 text-center sm:items-start sm:text-start">
         <Eyebrow>{WHO_WE_HELP.eyebrow}</Eyebrow>
         <h2 className="font-display text-h1">{WHO_WE_HELP.headline}</h2>
       </Reveal>
@@ -34,7 +34,7 @@ export function WhoWeHelp() {
               <Icon name={item.icon as IconName} className="h-5 w-5" strokeWidth={1.6} />
             </span>
             <div>
-              <h3 className="font-display text-h3">{item.label}</h3>
+              <h3 className="font-heading text-h3">{item.label}</h3>
               <p className="mt-1 text-body-sm text-(--color-text-secondary)">{item.note}</p>
             </div>
           </Reveal>

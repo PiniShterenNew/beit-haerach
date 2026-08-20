@@ -24,21 +24,24 @@ export function Hero() {
           בהמשך העמוד בתגי האייקונים, במפרידים ובתמונת המורשת — די בכך. */}
 
       <Container className="relative">
-        <div className="grid items-center gap-10 py-12 md:py-16 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16 lg:py-20">
-          {/* טקסט */}
-          <div className="flex flex-col gap-6">
+        <div className="grid items-center gap-10 py-10 md:py-16 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16 lg:py-20">
+          {/* טקסט — ממורכז במובייל, מיושר להתחלה מ-lg ומעלה */}
+          <div className="flex flex-col items-center gap-6 text-center lg:items-start lg:text-start">
             <p
-              className="hero-in text-overline font-body font-medium text-(--color-gold-300)"
+              className="hero-in text-overline font-body font-medium text-(--color-accent-on-deep)"
               style={delay(0)}
             >
               {HERO.eyebrow}
             </p>
 
-            <h1 className="hero-in font-display text-display font-black text-white" style={delay(150)}>
+            <h1
+              className="hero-in max-w-[16ch] font-display text-h1 font-black text-white lg:max-w-none"
+              style={delay(150)}
+            >
               {HERO.headline.map((line, i) => (
                 <span key={line} className="block">
                   {i === HERO.headline.length - 1 ? (
-                    <span className="text-(--color-gold-400)">{line}</span>
+                    <span className="text-(--color-accent-on-deep)">{line}</span>
                   ) : (
                     line
                   )}
@@ -46,12 +49,15 @@ export function Hero() {
               ))}
             </h1>
 
-            <p className="hero-in max-w-lg text-body-lg text-(--color-navy-100)" style={delay(350)}>
+            <p
+              className="hero-in max-w-[36ch] text-body-lg text-(--color-navy-100)"
+              style={delay(350)}
+            >
               {HERO.body}
             </p>
 
             <div
-              className="hero-in flex flex-col gap-3 pt-2 sm:flex-row sm:flex-wrap"
+              className="hero-in flex w-full flex-col items-center gap-3 pt-2 sm:w-auto sm:flex-row sm:flex-wrap sm:justify-center lg:justify-start"
               style={delay(550)}
             >
               <Button href="/donate" variant="donate" blockOnMobile>
@@ -63,9 +69,9 @@ export function Hero() {
             </div>
           </div>
 
-          {/* תמונה בצורת קשת — מוגבלת בגובה כדי שלא תשתלט על המסך הראשון */}
+          {/* תמונה בצורת קשת — רוחב מבוקר כדי שלא תשתלט על המסך הראשון */}
           <div
-            className="hero-in mx-auto w-full max-w-[17rem] sm:max-w-xs lg:max-w-[22rem]"
+            className="hero-in mx-auto w-full max-w-[15rem] sm:max-w-xs lg:max-w-[22rem]"
             style={delay(300)}
           >
             <ArchImage
@@ -73,7 +79,7 @@ export function Hero() {
               ratio="portrait"
               tint="var(--color-navy-800)"
               shape="var(--color-navy-700)"
-              ink="var(--color-gold-400)"
+              ink="var(--color-accent-on-deep)"
               label="תמונת פתיחה — המטבח והפעילות היומיומית"
             />
           </div>

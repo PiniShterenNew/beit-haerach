@@ -39,11 +39,11 @@ export default function DonatePage() {
               <ul className="flex flex-col gap-1">
                 {assurances.map((item) => (
                   <li key={item.title} className="flex items-start gap-4 border-b border-(--color-border-subtle) py-4">
-                    <span className="arch-badge shrink-0 bg-(--color-surface-gold) text-(--color-text-accent)" aria-hidden="true">
+                    <span className="arch-badge shrink-0 bg-(--color-surface-accent) text-(--color-text-accent)" aria-hidden="true">
                       <Icon name={item.icon} className="h-5 w-5" strokeWidth={1.6} />
                     </span>
                     <div>
-                      <h3 className="font-display text-h3">{item.title}</h3>
+                      <h3 className="font-heading text-h3">{item.title}</h3>
                       <p className="mt-1 text-body-sm text-(--color-text-secondary)">{item.body}</p>
                     </div>
                   </li>

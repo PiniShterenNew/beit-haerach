@@ -40,7 +40,7 @@ export default function TransparencyPage() {
 
       {/* פרטי רישום */}
       <Section tone="canvas">
-        <Reveal className="mb-8 flex flex-col gap-3">
+        <Reveal className="section-head flex flex-col items-center gap-3 text-center sm:items-start sm:text-start">
           <Eyebrow>פרטי הארגון</Eyebrow>
           <h2 className="font-display text-h2">רישום ואישורים</h2>
         </Reveal>
@@ -71,7 +71,7 @@ export default function TransparencyPage() {
 
       {/* מסמכים */}
       <Section tone="surface">
-        <Reveal className="mb-8 flex flex-col gap-3">
+        <Reveal className="section-head flex flex-col items-center gap-3 text-center sm:items-start sm:text-start">
           <Eyebrow>מסמכים</Eyebrow>
           <h2 className="font-display text-h2">להורדה ולעיון</h2>
         </Reveal>
@@ -84,11 +84,11 @@ export default function TransparencyPage() {
               index={i}
               className="flex items-start gap-4 rounded-xl border border-(--color-border-subtle) bg-(--color-canvas) p-5"
             >
-              <span className="arch-badge shrink-0 bg-(--color-surface-gold) text-(--color-text-accent)" aria-hidden="true">
+              <span className="arch-badge shrink-0 bg-(--color-surface-accent) text-(--color-text-accent)" aria-hidden="true">
                 <Icon name={doc.icon} className="h-5 w-5" strokeWidth={1.6} />
               </span>
               <div>
-                <h3 className="font-display text-h3">{doc.title}</h3>
+                <h3 className="font-heading text-h3">{doc.title}</h3>
                 <p className="mt-1 text-body-sm text-(--color-text-secondary)">{doc.body}</p>
                 <p className="mt-2 text-caption">
                   <Placeholder needs={`doc-${doc.title}`}>הקובץ יועלה עם אימותו</Placeholder>

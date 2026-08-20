@@ -37,7 +37,7 @@ export default function VolunteerPage() {
                     <Icon name={role.icon} className="h-5 w-5" strokeWidth={1.6} />
                   </span>
                   <div>
-                    <h3 className="font-display text-h3">{role.title}</h3>
+                    <h3 className="font-heading text-h3">{role.title}</h3>
                     <p className="mt-1 text-body-sm text-(--color-text-secondary)">{role.body}</p>
                   </div>
                 </li>

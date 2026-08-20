@@ -28,10 +28,10 @@ export function FourBranches() {
 
   return (
     <Section tone="canvas">
-      <Reveal className="mb-10 flex max-w-2xl flex-col gap-3 md:mb-14">
+      <Reveal className="section-head mx-auto flex max-w-2xl flex-col items-center gap-3 text-center sm:items-start sm:text-start">
         <Eyebrow>תחומי הפעילות</Eyebrow>
         <h2 className="font-display text-h1">ארבע זרועות. מעטפת אחת.</h2>
-        <p className="text-body-lg text-(--color-text-secondary)">
+        <p className="max-w-[38ch] text-body-lg text-(--color-text-secondary) sm:max-w-none">
           כל זרוע עומדת בפני עצמה, אבל אף אחת מהן לא נבנתה בנפרד — הן חלקים של אותה מעטפת,
           שנפרשת סביב אדם לפי מה שהוא צריך באותו רגע.
         </p>
@@ -73,8 +73,8 @@ export function FourBranches() {
         <BranchCell branch={dental} index={1} />
 
         {/* תא סטטיסטיקה */}
-        <BentoCell span="narrow" fill="deep" index={2}>
-          <p className="text-overline font-body font-medium text-(--color-gold-300)">פועלים כמעט כל השנה</p>
+        <BentoCell span="narrow" fill="deep" index={2} className="items-center text-center sm:items-start sm:text-start">
+          <p className="text-overline font-body font-medium text-(--color-accent-on-deep)">פועלים כמעט כל השנה</p>
           <p className="mt-auto pt-6 font-display text-stat font-black text-white" dir="ltr">
             345
           </p>
@@ -111,7 +111,7 @@ function BranchCell({
         <Icon name={branchIcon[branch.id]} className="h-6 w-6" strokeWidth={1.6} />
       </span>
 
-      <h3 className="font-display text-h3" style={{ color: branch.textColor }}>
+      <h3 className="font-heading text-h3" style={{ color: branch.textColor }}>
         {branch.name}
       </h3>
       <p className="mt-2 text-body font-medium text-(--color-text-primary)">{branch.tagline}</p>

@@ -88,7 +88,7 @@ export default function AboutPage() {
 
       {/* ציר זמן */}
       <Section tone="surface">
-        <Reveal className="mb-10 flex max-w-2xl flex-col gap-3 md:mb-14">
+        <Reveal className="section-head mx-auto flex max-w-2xl flex-col items-center gap-3 text-center sm:items-start sm:text-start">
           <Eyebrow>ציר הזמן</Eyebrow>
           <h2 className="font-display text-h2">איך המעטפת נבנתה</h2>
           <p className="text-body text-(--color-text-secondary)">
@@ -108,7 +108,7 @@ export default function AboutPage() {
               <span className="text-overline font-body font-medium text-(--color-text-accent)">
                 {entry.marker}
               </span>
-              <h3 className="font-display text-h3">{entry.title}</h3>
+              <h3 className="font-heading text-h3">{entry.title}</h3>
               <p className="text-body-sm text-(--color-text-secondary)">{entry.body}</p>
             </Reveal>
           ))}
@@ -117,7 +117,7 @@ export default function AboutPage() {
 
       {/* ערכים */}
       <Section tone="warm">
-        <Reveal className="mb-10 flex max-w-2xl flex-col gap-3 md:mb-14">
+        <Reveal className="section-head mx-auto flex max-w-2xl flex-col items-center gap-3 text-center sm:items-start sm:text-start">
           <Eyebrow>ערכים</Eyebrow>
           <h2 className="font-display text-h2">מה שמנחה כל החלטה</h2>
         </Reveal>
@@ -137,7 +137,7 @@ export default function AboutPage() {
                 <Icon name={value.icon as IconName} className="h-5 w-5" strokeWidth={1.6} />
               </span>
               <div>
-                <h3 className="font-display text-h3">{value.title}</h3>
+                <h3 className="font-heading text-h3">{value.title}</h3>
                 <p className="mt-1 text-body-sm text-(--color-text-secondary)">{value.body}</p>
               </div>
             </Reveal>

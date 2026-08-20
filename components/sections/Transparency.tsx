@@ -30,12 +30,12 @@ export function Transparency() {
             className="flex flex-col items-center gap-3 rounded-xl border border-(--color-border-subtle) bg-(--color-surface) p-8 shadow-bento"
           >
             <span
-              className="arch-badge mb-1 bg-(--color-surface-gold) text-(--color-text-accent)"
+              className="arch-badge mb-1 bg-(--color-surface-accent) text-(--color-text-accent)"
               aria-hidden="true"
             >
               <Icon name={card.icon as IconName} className="h-5 w-5" strokeWidth={1.6} />
             </span>
-            <h3 className="font-display text-h3">{card.title}</h3>
+            <h3 className="font-heading text-h3">{card.title}</h3>
             <p className="text-body-sm text-(--color-text-secondary)">{card.body}</p>
             <p className="mt-1 text-body-sm font-medium">
               <Placeholder needs={card.title}>{card.detail.value}</Placeholder>
