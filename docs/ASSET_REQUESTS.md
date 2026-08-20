@@ -31,8 +31,16 @@ non-documentary by design.
 - Composition: portrait or documented moment of Rabbi Avraham Atlas זצ״ל
 - Must NOT appear: any AI-generated likeness of a real, named individual —
   this is an absolute rule, not a style preference
-- Status: **[נדרש אימות]** — requires verified archival source with
-  provenance recorded in `docs/ASSET_SOURCES.md`
+- Status: **resolved** — real photograph supplied directly by the project
+  stakeholder (chat upload, 2026-08-20), stored at
+  `public/assets/real/rabbi-avraham-atlas.webp`. Provenance recorded in
+  `docs/ASSET_SOURCES.md`. Biographical dates/roles are still **not**
+  published on-site — a web search surfaced a plausible match (dayan,
+  Haifa rabbinical court; founder of an Or Simcha yeshiva) but it could not
+  be verified against a primary source in this session, and a
+  similarly-named rabbi (הרב אברהם אטיאס) showed up in the same search,
+  so it stays unconfirmed rather than risk misattributing a fact to the
+  wrong person.
 
 ### img.program.guesthouse.hero / img.program.dental.hero /
 ### img.program.kollels.hero / img.program.yeshiva.hero

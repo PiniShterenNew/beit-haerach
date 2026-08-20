@@ -18,11 +18,9 @@ export function Legacy() {
         {/* תמונה בקשת */}
         <Reveal className="mx-auto w-full max-w-xs lg:max-w-sm">
           <ArchImage
+            src="/assets/real/rabbi-avraham-atlas.webp"
+            alt="הרב אברהם אטלס זצ״ל"
             ratio="portrait"
-            tint="var(--color-gold-100)"
-            shape="var(--color-gold-300)"
-            ink="var(--color-gold-800)"
-            label="תמונה — הרב אברהם אטלס זצ״ל"
           />
         </Reveal>
 
