@@ -6,11 +6,13 @@ material has been run yet in this build pass — this file is the register to
 fill in as sourcing happens, not a claim that sourcing is complete.
 
 ## Status
-No candidate sources logged yet. `[נדרש אימות]` for all rows below.
+One resolved row below (`img.legacy.rabbi-atlas.01`); everything else still
+`[נדרש אימות]`.
 
 | Candidate source | Subject | Rights/provenance | Decision | Notes |
 |---|---|---|---|---|
-| — | — | — | — | Web sourcing for real historical/public material (organization, בית הארחה, Rabbi Avraham Atlas זצ״ל, physical location, historical activity, public reports) has not yet been performed for this build pass. |
+| Supplied directly by project stakeholder via chat upload, 2026-08-20 | Rabbi Avraham Atlas זצ״ל (portrait) | Supplied by the org's own representative in this session; no third-party/stock source involved | **use** | Cropped to the subject and converted to WebP; stored at `public/assets/real/rabbi-avraham-atlas.webp`. Wired into `components/sections/Legacy.tsx` and `app/legacy/page.tsx`. Biographical text (dates, roles) was **not** added — see `ASSET_REQUESTS.md` note. |
+| — | — | — | — | Web sourcing for the rest of the real historical/public material (organization, בית הארחה, physical location, historical activity, public reports) has not yet been performed for this build pass. |
 
 ## Process for future sourcing passes
 1. Search for public material tied to the organization, "בית הארחה", Rabbi

@@ -1,6 +1,6 @@
 {
   "$schema": "internal://ezrat-yisrael/asset-manifest",
-  "lastUpdated": "2026-08-18",
+  "lastUpdated": "2026-08-20",
   "assets": [
     {
       "id": "img.home.hero.01",
@@ -50,9 +50,9 @@
       "preferredSource": "real",
       "aspectRatio": { "desktop": "4:3", "mobile": "4:3" },
       "textSafeZone": "none",
-      "altTextIntent": "Historical photograph of Rabbi Avraham Atlas זצ״ל or early activity",
-      "status": "placeholder — requires verified archival source, never to be generated",
-      "component": "app/page.tsx"
+      "altTextIntent": "הרב אברהם אטלס זצ״ל",
+      "status": "complete — public/assets/real/rabbi-avraham-atlas.webp, supplied directly by project stakeholder (chat upload, 2026-08-20)",
+      "component": "components/sections/Legacy.tsx, app/legacy/page.tsx"
     },
     {
       "id": "img.about.history.01",
